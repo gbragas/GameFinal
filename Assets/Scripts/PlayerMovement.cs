@@ -40,6 +40,19 @@ public class PlayerMovement : MonoBehaviour
     {
         isSprinting = sprinting;
     }
+    public void Jump()
+    {
+        if (IsGrounded())
+        {
+            animator.SetTrigger("isJumping");
+            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+        }
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, 0.1f);
+    }
 
     private void FixedUpdate()
     {

@@ -54,6 +54,11 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if(movement != null && context.performed) movement.Jump();
+    }
+
     public void OnAttack(InputAction.CallbackContext context)
     {
         // if(combat == null) return;
