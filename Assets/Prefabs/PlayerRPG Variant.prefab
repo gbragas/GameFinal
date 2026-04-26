@@ -122,7 +122,7 @@ PrefabInstance:
       addedObject: {fileID: 7056504576246863980}
     - targetCorrespondingSourceObject: {fileID: 2361210368917107374, guid: cc78880d476ac48c3a8087991862b46c, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1570272811633911028}
+      addedObject: {fileID: 1169969412112565660}
   m_SourcePrefab: {fileID: 100100000, guid: cc78880d476ac48c3a8087991862b46c, type: 3}
 --- !u!4 &2052296393615700533 stripped
 Transform:
@@ -417,7 +417,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1570272811633911028
+--- !u!114 &1169969412112565660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -430,9 +430,87 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSound
   swingSounds: []
-  grassFS:
-  - {fileID: 8300000, guid: 023ea3ddeaa8dd146b7633a0800e5a0e, type: 3}
-  rockFS:
-  - {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
-  woodFS:
-  - {fileID: 8300000, guid: 2352822feb4caa14ebdbc0c713289f8d, type: 3}
+  grassWalk:
+  - {fileID: 8300000, guid: e25e50f6d5542e345925db140669fa28, type: 3}
+  - {fileID: 8300000, guid: 73b93160960e65c439811f795af10d49, type: 3}
+  - {fileID: 8300000, guid: ea6b70ae708f23b43bb72ecb70492cea, type: 3}
+  - {fileID: 8300000, guid: 530eb600dab7a654b852ffc11fa75975, type: 3}
+  - {fileID: 8300000, guid: 8a2fec7635b0b6a428fba0d73b614013, type: 3}
+  - {fileID: 8300000, guid: 4708974881346884c9114fb0d35ed5f7, type: 3}
+  rockWalk:
+  - {fileID: 8300000, guid: 2a84fdcfa32c3054ab3d3d84f8ef20ce, type: 3}
+  - {fileID: 8300000, guid: f170f7cba73f2434c9f11fa7a6f62e69, type: 3}
+  - {fileID: 8300000, guid: 53fceb61a9eda3f4a8a756433b09b4aa, type: 3}
+  - {fileID: 8300000, guid: a2942debbe6faa24aa7ceb7b39e2d503, type: 3}
+  - {fileID: 8300000, guid: 75886e9746d57a24fb71081d906cd069, type: 3}
+  - {fileID: 8300000, guid: bcab54d00d5e8e844adb30845a11216a, type: 3}
+  dirtWalk:
+  - {fileID: 8300000, guid: 5416ab5b59f0b9e4d90d1f158156bba2, type: 3}
+  - {fileID: 8300000, guid: 916ab207c63653147b3236a04071875a, type: 3}
+  - {fileID: 8300000, guid: d0cca4856e4e7ef4fbbb5754df7b025d, type: 3}
+  - {fileID: 8300000, guid: 0f27cbdbb9269e240be1109f3144c1e2, type: 3}
+  - {fileID: 8300000, guid: 6c43117561a2ce145b3a4af1671da927, type: 3}
+  - {fileID: 8300000, guid: fe4f710ed963b3744804cf3a9f77c0be, type: 3}
+  woodWalk:
+  - {fileID: 8300000, guid: 86ab8bea0219b7b4bac200a9f4e76820, type: 3}
+  - {fileID: 8300000, guid: a47410186f2a0d04498f1de78b46ecf3, type: 3}
+  - {fileID: 8300000, guid: 28416955e1b17094cb105e52f693a05c, type: 3}
+  - {fileID: 8300000, guid: 388d998d8b08a024abb1440b617c7096, type: 3}
+  - {fileID: 8300000, guid: 4e1d49605b1690745915f6fbc23ccc7c, type: 3}
+  - {fileID: 8300000, guid: 0cdcabe1c9403bf409eedc57fc346a77, type: 3}
+  grassRun:
+  - {fileID: 8300000, guid: ba088685d493e5f429c121bb8a8d993d, type: 3}
+  - {fileID: 8300000, guid: 1ef434bfd13fd564b80cd0944aa65c4e, type: 3}
+  - {fileID: 8300000, guid: cec53baf583164142aee93af2c3edcd2, type: 3}
+  - {fileID: 8300000, guid: bacc7e6a66c6c454b9e02cec13531e82, type: 3}
+  - {fileID: 8300000, guid: 35b3776f401f01b4bb16513a6c8781dd, type: 3}
+  - {fileID: 8300000, guid: 01b62f7ba1bfc2e4b98ad8465803195b, type: 3}
+  rockRun:
+  - {fileID: 8300000, guid: 4e40a9bd20aed89408b2f07be3129d06, type: 3}
+  - {fileID: 8300000, guid: 8f1cb38f11ae54e4d9391c1245fdf704, type: 3}
+  - {fileID: 8300000, guid: 81276749f74d26148a90063ab93bd35f, type: 3}
+  - {fileID: 8300000, guid: 3e68b355388d6804b919ed866e5060b1, type: 3}
+  - {fileID: 8300000, guid: 9e5bc40072f71bb44b1722ca9c3b254d, type: 3}
+  - {fileID: 8300000, guid: b8a92dd112875e04da588ec04a14b253, type: 3}
+  dirtRun:
+  - {fileID: 8300000, guid: 3fb5b62ebbeb4d74da39fbf491b7464b, type: 3}
+  - {fileID: 8300000, guid: 710aa5e44f997eb47a6f60d396a04d5d, type: 3}
+  - {fileID: 8300000, guid: f292fdb609800484d8b607aaeb0ddf19, type: 3}
+  - {fileID: 8300000, guid: 7514f339c3d55c843a96a895972b58af, type: 3}
+  - {fileID: 8300000, guid: 33e0c99226625dd4f8b5617fa90d3613, type: 3}
+  - {fileID: 8300000, guid: 8211706fd6e967a4aae4c494b16230a1, type: 3}
+  woodRun:
+  - {fileID: 8300000, guid: 51d7b88f8d77bad43aefc6f00432dcb3, type: 3}
+  - {fileID: 8300000, guid: 21fc9084c88fb384cb8320a6aac8a287, type: 3}
+  - {fileID: 8300000, guid: 47e14865142d0ed49b9128ee5bf22d2b, type: 3}
+  - {fileID: 8300000, guid: d9304060601596f459c423c13db91129, type: 3}
+  - {fileID: 8300000, guid: bf1c57baba4cba047913a3a287bf8c2d, type: 3}
+  - {fileID: 8300000, guid: 1b3c910461252414c9bed9bee2dc659e, type: 3}
+  grassJump:
+  - {fileID: 8300000, guid: 3f2d206f91749e344813397216cf44ce, type: 3}
+  - {fileID: 8300000, guid: 60560d926a2f587428ac96deb6e9df11, type: 3}
+  - {fileID: 8300000, guid: 36f0566890d947645899c4a0207f2016, type: 3}
+  - {fileID: 8300000, guid: 996adf21dd3f24d4a85ec3fbc199f4a5, type: 3}
+  - {fileID: 8300000, guid: 4063b31808a4eee40985f3644b85e88e, type: 3}
+  - {fileID: 8300000, guid: 1871d5588a7f69b42a578632aad6956c, type: 3}
+  rockJump:
+  - {fileID: 8300000, guid: c52cca62ea278bf4a908f6a76072b1bb, type: 3}
+  - {fileID: 8300000, guid: 2bd619aaf17531741b1ac7baadd08eb6, type: 3}
+  - {fileID: 8300000, guid: f855cef75d9a5134690526cc4905ff74, type: 3}
+  - {fileID: 8300000, guid: f638793318e23404cafe2c8b7cac8607, type: 3}
+  - {fileID: 8300000, guid: 92e3aab06656151449ef52459d29e162, type: 3}
+  - {fileID: 8300000, guid: 9315074453b8641408467e3008f1dd80, type: 3}
+  dirtJump:
+  - {fileID: 8300000, guid: 623fedd45080ca74bae639e26e2dd34f, type: 3}
+  - {fileID: 8300000, guid: 3bdcdb547ab3d8d43a7576ddc417494d, type: 3}
+  - {fileID: 8300000, guid: 1b2994262d0cfa64cb7c1ea2a17c67e5, type: 3}
+  - {fileID: 8300000, guid: 745336c8c45fcf0448c274f799e812fd, type: 3}
+  - {fileID: 8300000, guid: 921fa7337d371e744a152d17561cc50a, type: 3}
+  - {fileID: 8300000, guid: 83c64aafc35d13647a9ab00b3e87bead, type: 3}
+  woodJump:
+  - {fileID: 8300000, guid: bba5a4b2b483ab24a95227c49cc47b54, type: 3}
+  - {fileID: 8300000, guid: fc40f88628baae2449eea3f3522ac93c, type: 3}
+  - {fileID: 8300000, guid: 17152aa3474fc474595a81ff9608489f, type: 3}
+  - {fileID: 8300000, guid: 3330fab061ffc9a44af72520d9f56796, type: 3}
+  - {fileID: 8300000, guid: 09c149f4a1538bd4488ee8ef924856b9, type: 3}
+  - {fileID: 8300000, guid: c854b1e13ef1d004caca84267b4318e5, type: 3}
