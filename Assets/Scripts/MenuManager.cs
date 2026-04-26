@@ -6,8 +6,8 @@ public class MenuManager : MonoBehaviour
     // Método para iniciar o jogo (Fase 1)
     public void Play()
     {
-        Debug.Log("Carregando Fase1...");
-        SceneManager.LoadScene("Fase1");
+        Debug.Log("Carregando InitialScene...");
+        SceneManager.LoadScene("InitialScene");
     }
 
     // Método para abrir a tela de créditos
