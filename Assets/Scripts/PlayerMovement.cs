@@ -51,7 +51,10 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 0.1f);
+        float distance = 0.3f; // aumenta isso
+        Vector3 origin = transform.position + Vector3.up * 0.1f;
+
+        return Physics.Raycast(origin, Vector3.down, distance);
     }
 
     private void FixedUpdate()
