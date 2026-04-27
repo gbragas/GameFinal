@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5003257899507768075, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
       propertyPath: m_Name
-      value: Props_7 Variant
+      value: Props_7 Variant Dark
       objectReference: {fileID: 0}
     - target: {fileID: 6768743221385502464, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -59,6 +59,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5003257899507768075, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8143187479521358089}
+    - targetCorrespondingSourceObject: {fileID: 5003257899507768075, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4008280824213839407}
+    - targetCorrespondingSourceObject: {fileID: 5003257899507768075, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 599904510055316697}
   m_SourcePrefab: {fileID: 100100000, guid: 6f738fb77864d40a897944587bdbdbd2, type: 3}
 --- !u!1 &6908929027974940103 stripped
 GameObject:
@@ -79,3 +85,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HammerController
   speed: 2
   maxAngle: 90
+--- !u!64 &4008280824213839407
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908929027974940103}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8070298290176478403, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &599904510055316697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6908929027974940103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078792cc8f4464837b18fcd7249d1186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HammerImpulseTrigger
+  playerTag: Player
+  oneImpulsePerTouch: 1
