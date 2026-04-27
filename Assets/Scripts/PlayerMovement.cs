@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private float animXVelocity, animYVelocity;
     private Transform spawnPoint;
     private Quaternion initialRotation;
+    [SerializeField] private float pushForce = 1000f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -194,6 +195,16 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isDead", false);
     }
+
+    public void Push(Vector3 direction)
+    {
+        // remove velocidade atual (opcional, deixa o knockback mais consistente)
+        rb.linearVelocity = Vector3.zero;
+
+        // aplica força
+        rb.AddForce(direction.normalized * pushForce, ForceMode.Impulse);
+    }
+
     // Update is called once per frame
     void Update()
     {

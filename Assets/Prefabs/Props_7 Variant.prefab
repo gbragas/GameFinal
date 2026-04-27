@@ -64,7 +64,7 @@ PrefabInstance:
       addedObject: {fileID: 848070637056546343}
     - targetCorrespondingSourceObject: {fileID: 5003257899507768075, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6948662501399631466}
+      addedObject: {fileID: -4686936680327533542}
   m_SourcePrefab: {fileID: 100100000, guid: de3df4a73a200dd4aab4b967d8702018, type: 3}
 --- !u!1 &6908929027974940103 stripped
 GameObject:
@@ -101,13 +101,13 @@ MeshCollider:
     m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
-  m_ProvidesContacts: 0
+  m_ProvidesContacts: 1
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8070298290176478403, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
---- !u!114 &6948662501399631466
+--- !u!114 &-4686936680327533542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,8 +116,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6908929027974940103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1152ee81fcd1c4133abc5edcc9d50901, type: 3}
+  m_Script: {fileID: 11500000, guid: 078792cc8f4464837b18fcd7249d1186, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrapKillTrigger
+  m_EditorClassIdentifier: Assembly-CSharp::HammerImpulseTrigger
   playerTag: Player
-  oneKillPerTouch: 1
+  oneImpulsePerTouch: 1
