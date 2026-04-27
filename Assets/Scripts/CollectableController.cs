@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CollectableController : MonoBehaviour
 {
     public float rotationSpeed = 100f;
     public float hoverSpeed = 2f;
     public float hoverHeight = 0.5f;
+
+    [Header("Eventos de Proximidade")]
+    public UnityEvent OnPlayerEnter;
+    public UnityEvent OnPlayerExit;
 
     private Vector3 startPosition;
 
@@ -42,6 +47,22 @@ public class CollectableController : MonoBehaviour
         // === FLUTUAÇÃO: sobe e desce no eixo Y ===
         float newY = startPosition.y + Mathf.Sin(Time.time * hoverSpeed) * hoverHeight;
         transform.position = new Vector3(startPosition.x, newY, startPosition.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            OnPlayerEnter.Invoke();
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            OnPlayerExit.Invoke();
+        }
     }
 
     public void Collect()
