@@ -142,27 +142,133 @@ public class GameManager : MonoBehaviour
     // ─────────────────────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Registra a coleta de um item. Incrementa contadores e troca o prefab
-    /// visual do jogador.
+    /// Registra a coleta de um item (memória). Incrementa contadores e inicia
+    /// a cutscene de memória. A troca de prefab só acontece quando a cutscene terminar.
     /// </summary>
-    public void RegistrarColeta()
+    /// <param name="collectablePrefab">Prefab do collectable para exibir na cutscene.</param>
+    public void RegistrarColeta(GameObject collectablePrefab = null)
     {
+        int versaoAnterior = TotalColetados;
+
         ColetadosNoMapa++;
         TotalColetados = Mathf.Clamp(TotalColetados + 1, 0, playerPrefabs.Length - 1);
 
-        Debug.Log($"[GameManager] Item coletado! Mapa: {ColetadosNoMapa}/{itensPorMapa} | Total: {TotalColetados}");
+        int versaoNova = TotalColetados;
+        int indiceMemoria = versaoAnterior; // memória 0 = primeira coletada, etc.
 
-        // Troca o modelo do player
-        SubstituirPlayer();
+        Debug.Log($"[GameManager] Memória coletada! Mapa: {ColetadosNoMapa}/{itensPorMapa} | Total: {TotalColetados}");
 
         // Notifica a HUD
         OnItemColetado?.Invoke(ColetadosNoMapa, itensPorMapa);
 
-        // Verifica se completou o mapa
-        if (ColetadosNoMapa >= itensPorMapa)
+        // Tenta iniciar a cutscene — se não existir, troca direto
+        var cutscene = CutsceneEvolucao.Instance;
+        if (cutscene != null && versaoAnterior != versaoNova)
         {
-            Debug.Log("[GameManager] Mapa completo! Todos os itens foram coletados.");
-            OnMapaCompleto?.Invoke();
+            // Congela o player durante a cutscene
+            CongelarPlayer(true);
+
+            cutscene.Iniciar(indiceMemoria, collectablePrefab, () =>
+            {
+                // Callback: cutscene terminou → troca o prefab e libera
+                SubstituirPlayer();
+                CongelarPlayer(false);
+
+                // Verifica se completou o mapa
+                if (ColetadosNoMapa >= itensPorMapa)
+                {
+                    Debug.Log("[GameManager] Mapa completo! Todas as memórias foram recuperadas.");
+                    OnMapaCompleto?.Invoke();
+                }
+            });
+        }
+        else
+        {
+            // Sem cutscene → troca instantânea (fallback)
+            SubstituirPlayer();
+
+            if (ColetadosNoMapa >= itensPorMapa)
+            {
+                Debug.Log("[GameManager] Mapa completo! Todas as memórias foram recuperadas.");
+                OnMapaCompleto?.Invoke();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Congela/descongela TODA interação do jogador durante a cutscene:
+    ///   • PlayerMovement (para de andar)
+    ///   • PlayerInputHandler (para de processar teclas)
+    ///   • PlayerInput (Input System — bloqueia teclado/mouse/gamepad)
+    ///   • CinemachineInputAxisController (para de orbitar a câmera)
+    ///   • Animator (congela animação)
+    /// </summary>
+    private void CongelarPlayer(bool congelar)
+    {
+        playerAtual = GameObject.FindWithTag("Player");
+        if (playerAtual == null) return;
+
+        // ── 1. Movimento ──
+        var movement = playerAtual.GetComponent<PlayerMovement>();
+        if (movement != null)
+        {
+            movement.SetMovementEnabled(!congelar);
+            if (congelar)
+            {
+                movement.SetMoveInput(Vector2.zero);
+                movement.SetSprinting(false);
+            }
+        }
+
+        // ── 2. Input Handler custom ──
+        var inputHandler = playerAtual.GetComponent<PlayerInputHandler>();
+        if (inputHandler != null)
+        {
+            inputHandler.enabled = !congelar;
+        }
+
+        // ── 3. PlayerInput do Input System (bloqueia TUDO: teclado, mouse, gamepad) ──
+        var playerInput = playerAtual.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        if (playerInput != null)
+        {
+            playerInput.enabled = !congelar;
+        }
+
+        // ── 4. Animator (congela a pose) ──
+        var animator = playerAtual.GetComponentInChildren<Animator>();
+        if (animator != null)
+        {
+            animator.speed = congelar ? 0f : 1f;
+        }
+
+        // ── 5. Cinemachine Input (para de orbitar/rotacionar a câmera) ──
+        DesativarInputCinemachine(congelar);
+    }
+
+    /// <summary>
+    /// Desativa/ativa o processamento de input do Cinemachine
+    /// para impedir que o jogador orbite a câmera durante cutscenes.
+    /// </summary>
+    private void DesativarInputCinemachine(bool desativar)
+    {
+        // CinemachineInputAxisController é o componente que lê mouse/gamepad
+        // para orbitar a câmera no Cinemachine 3.x
+        var inputControllers = FindObjectsByType<Unity.Cinemachine.CinemachineInputAxisController>(
+            FindObjectsSortMode.None);
+        foreach (var ctrl in inputControllers)
+        {
+            ctrl.enabled = !desativar;
+        }
+
+        // Também tenta desativar qualquer InputAxisController legado
+        var vCam = FindAnyObjectByType<Unity.Cinemachine.CinemachineCamera>();
+        if (vCam != null)
+        {
+            var axisInput = vCam.GetComponent<Unity.Cinemachine.CinemachineInputAxisController>();
+            if (axisInput != null)
+            {
+                axisInput.enabled = !desativar;
+            }
         }
     }
 
@@ -195,66 +301,31 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Guarda posição, rotação e dados relevantes
+        // Guarda posição, rotação e parent do player
         Vector3 posicao = playerAtual.transform.position;
         Quaternion rotacao = playerAtual.transform.rotation;
         Transform parentOriginal = playerAtual.transform.parent;
 
-        // Transfere a referência da câmera ANTES de destruir
-        PlayerMovement movimentoAntigo = playerAtual.GetComponent<PlayerMovement>();
-        Transform cameraRef = movimentoAntigo != null ? movimentoAntigo.cameraTransform : null;
-
-        // ★ DESATIVA o player antigo IMEDIATAMENTE para que FindWithTag
-        //   não o encontre de novo (Destroy é deferido ao fim do frame)
+        // Desativa e destrói o player antigo
         playerAtual.SetActive(false);
         Destroy(playerAtual);
 
-        // Instancia o novo player
+        // Instancia o novo player (já vem com a câmera própria dele configurada no prefab)
         GameObject novoPlayer = Instantiate(playerPrefabs[versao], posicao, rotacao, parentOriginal);
         novoPlayer.name = $"Player-v{versao}";
         novoPlayer.tag = "Player";
 
-        // Transfere a referência da câmera
-        PlayerMovement movimentoNovo = novoPlayer.GetComponent<PlayerMovement>();
-        if (cameraRef != null && movimentoNovo != null)
-        {
-            movimentoNovo.cameraTransform = cameraRef;
-        }
-
-        // Se houver câmera Cinemachine/Follow, atualiza o target
-        AtualizarCameraTarget(novoPlayer.transform);
-
         playerAtual = novoPlayer;
 
-        Debug.Log($"[GameManager] Player trocado para v{versao}");
+        Debug.Log($"[GameManager] Player trocado para v{versao}. O novo prefab gerenciará sua própria câmera.");
     }
 
     /// <summary>
-    /// Tenta atualizar câmeras que seguem o player (Cinemachine ou script custom).
-    /// Força snap instantâneo para evitar deslocamento de câmera na troca.
+    /// Mantido vazio por compatibilidade, pois os prefabs do player agora gerenciam suas próprias câmeras.
     /// </summary>
     private void AtualizarCameraTarget(Transform novoTarget)
     {
-        // Procura Cinemachine Virtual Camera (se existir)
-        var vCam = FindAnyObjectByType<Unity.Cinemachine.CinemachineCamera>();
-        if (vCam != null)
-        {
-            vCam.Follow = novoTarget;
-            vCam.LookAt = novoTarget;
-
-            // ★ Força a câmera a snapar INSTANTANEAMENTE para o novo target
-            //   sem fazer transição suave (que causava o deslocamento)
-            vCam.ForceCameraPosition(vCam.transform.position, vCam.transform.rotation);
-
-            // Também procura o CinemachineBrain e força update imediato
-            var brain = FindAnyObjectByType<Unity.Cinemachine.CinemachineBrain>();
-            if (brain != null)
-            {
-                brain.ManualUpdate();
-            }
-
-            Debug.Log("[GameManager] Cinemachine atualizado e snapado para novo player.");
-        }
+        // Não faz nada — a câmera já está embutida no prefab do player.
     }
 
     // ─────────────────────────────────────────────────────────────────────────

@@ -116,6 +116,17 @@ public class Dialogo : MonoBehaviour
             StartCoroutine(IniciarComDelay());
     }
 
+    // ── API de configuração ───────────────────────────────────────────────────
+
+    /// <summary>
+    /// Desabilita o início automático. Chame ANTES do Start() rodar
+    /// (ou seja, logo após Instantiate, no mesmo frame).
+    /// </summary>
+    public void DesativarAutoStart()
+    {
+        iniciarAutomaticamente = false;
+    }
+
     private IEnumerator IniciarComDelay()
     {
         yield return new WaitForSeconds(delayInicial);

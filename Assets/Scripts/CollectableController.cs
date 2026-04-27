@@ -7,6 +7,11 @@ public class CollectableController : MonoBehaviour
     public float hoverSpeed = 2f;
     public float hoverHeight = 0.5f;
 
+    [Header("Identificação da Memória")]
+    [Tooltip("Prefab original deste collectable (arraste o mesmo prefab aqui). " +
+             "Usado para exibir o modelo 3D na cutscene de memória.")]
+    public GameObject collectablePrefab;
+
     [Header("Eventos de Proximidade")]
     public UnityEvent OnPlayerEnter;
     public UnityEvent OnPlayerExit;
@@ -71,10 +76,12 @@ public class CollectableController : MonoBehaviour
         if (jaColetado) return; // Já foi coletado, ignora chamadas duplicadas
         jaColetado = true;
 
-        // Registra a coleta no GameManager (incrementa contadores + troca prefab)
+        // Registra a coleta no GameManager, passando o prefab para a cutscene
         if (GameManager.Instance != null)
         {
-            GameManager.Instance.RegistrarColeta();
+            // Usa o prefab configurado, ou o próprio GameObject como fallback
+            GameObject prefabParaCutscene = collectablePrefab != null ? collectablePrefab : gameObject;
+            GameManager.Instance.RegistrarColeta(prefabParaCutscene);
         }
 
         Destroy(gameObject);
