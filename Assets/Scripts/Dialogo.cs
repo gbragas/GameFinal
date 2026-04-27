@@ -33,6 +33,14 @@ public class Dialogo : MonoBehaviour
     [Header("Áudio")]
     [Tooltip("AudioSource que tocará as dublagens.")]
     [SerializeField] private AudioSource audioSource;
+    [Header("Fade de Áudio")]
+    [Tooltip("Habilita o efeito de fade in/out no volume do áudio.")]
+    [SerializeField] private bool usarFadeAudio = true;
+    [Tooltip("Duração do aumento gradual de volume no início de cada fala.")]
+    [SerializeField] private float duracaoFadeIn = 0.5f;
+    [Tooltip("Duração da diminuição gradual de volume ao fim de cada fala.")]
+    [SerializeField] private float duracaoFadeOut = 0.5f;
+    private float volumeMaximoOriginal = 1f;
 
     [Header("Texto Padrão")]
     [Tooltip("Fallback: usado quando a Fala não especifica Texto Alvo.")]
@@ -91,6 +99,9 @@ public class Dialogo : MonoBehaviour
 
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
+
+        if (audioSource != null)
+            volumeMaximoOriginal = audioSource.volume;
 
         // Esconde textos e gera fantasmas para todos os alvos únicos
         var alvosProcessados = new HashSet<TextMeshProUGUI>();
@@ -206,7 +217,17 @@ public class Dialogo : MonoBehaviour
             if (falaAtual.dublagem != null)
             {
                 audioSource.clip = falaAtual.dublagem;
-                audioSource.Play();
+                if (usarFadeAudio)
+                {
+                    audioSource.volume = 0f;
+                    audioSource.Play();
+                    StartCoroutine(FadeVolume(volumeMaximoOriginal, duracaoFadeIn));
+                }
+                else
+                {
+                    audioSource.volume = volumeMaximoOriginal;
+                    audioSource.Play();
+                }
             }
 
             float duracaoTotal = (falaAtual.dublagem != null) ? falaAtual.dublagem.length : 1f;
@@ -254,12 +275,18 @@ public class Dialogo : MonoBehaviour
                 if (tempoExibicaoFinal > 0f && s < segs.Length - 1)
                     yield return new WaitForSeconds(tempoExibicaoFinal);
 
-                // Esconde entre segmentos (exceto no último — ele some abaixo)
                 if (s < segs.Length - 1)
                 {
                     EsconderComFantasmas(textoAtivo);
                     yield return new WaitForSeconds(0.05f); // flash de transição
                 }
+            }
+
+            // Fade out do áudio ao terminar os segmentos desta fala
+            if (usarFadeAudio && falaAtual.dublagem != null)
+            {
+                yield return StartCoroutine(FadeVolume(0f, duracaoFadeOut));
+                audioSource.Stop();
             }
 
             // Pausa final após o último segmento
@@ -420,5 +447,22 @@ public class Dialogo : MonoBehaviour
         if (alvo == null) return;
         alvo.text = string.Empty;
         alvo.gameObject.SetActive(false);
+    }
+
+    private IEnumerator FadeVolume(float targetVolume, float duration)
+    {
+        if (audioSource == null) yield break;
+
+        float startVolume = audioSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, targetVolume, elapsed / duration);
+            yield return null;
+        }
+
+        audioSource.volume = targetVolume;
     }
 }
