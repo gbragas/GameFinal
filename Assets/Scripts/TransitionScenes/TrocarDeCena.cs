@@ -106,22 +106,58 @@ public class TrocarDeCena : MonoBehaviour
             yield return new WaitForSeconds(delayAntesDeTrocar);
 
         aoCarregarCena?.Invoke();
-        SceneManager.LoadScene(nome);
+        TransitionManager.targetSceneName = nome;
+        if (Application.CanStreamedLevelBeLoaded("TransitionScene"))
+        {
+            SceneManager.LoadScene("TransitionScene");
+        }
+        else
+        {
+            SceneManager.LoadScene(nome);
+        }
     }
 
     private void ExecutarTroca()
     {
         aoCarregarCena?.Invoke();
 
+        string cenaAlvo = "";
         if (indiceDeCena >= 0)
         {
-            Debug.Log($"[TrocarDeCena] Carregando cena índice {indiceDeCena}");
-            SceneManager.LoadScene(indiceDeCena);
+            cenaAlvo = SceneUtility.GetScenePathByBuildIndex(indiceDeCena);
+            if (!string.IsNullOrEmpty(cenaAlvo))
+                cenaAlvo = System.IO.Path.GetFileNameWithoutExtension(cenaAlvo);
         }
         else if (!string.IsNullOrEmpty(nomeDaCena))
         {
-            Debug.Log($"[TrocarDeCena] Carregando cena \"{nomeDaCena}\"");
-            SceneManager.LoadScene(nomeDaCena);
+            cenaAlvo = nomeDaCena;
+        }
+
+        if (!string.IsNullOrEmpty(cenaAlvo))
+        {
+            // Usar TransitionManager se existir e a cena for transição
+            Debug.Log($"[TrocarDeCena] Indo para cena \"{cenaAlvo}\" via Transição.");
+            TransitionManager.targetSceneName = cenaAlvo;
+            
+            // Tenta carregar a cena de transição. Caso a cena não exista no build (erro comum ao recém criar), 
+            // no pior caso ela dará erro no Unity, então o usuário precisa colocar a "TransitionScene" no Build Settings.
+            // Para ser flexível, se "TransitionScene" não puder ser carregada, cairá de volta pro SceneManager padrão
+            try
+            {
+                if (Application.CanStreamedLevelBeLoaded("TransitionScene"))
+                {
+                    SceneManager.LoadScene("TransitionScene");
+                }
+                else
+                {
+                    Debug.LogWarning("[TrocarDeCena] Cena 'TransitionScene' não encontrada no Build Settings. Carregando direto.");
+                    SceneManager.LoadScene(cenaAlvo);
+                }
+            }
+            catch (System.Exception)
+            {
+                SceneManager.LoadScene(cenaAlvo);
+            }
         }
         else
         {
