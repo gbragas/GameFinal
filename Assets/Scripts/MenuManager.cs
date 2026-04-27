@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Configurações de Som")]
+    [SerializeField] private GameObject painelSom;
+
     private bool carregando = false;
 
     // Método para iniciar o jogo (Fase 1)
@@ -44,5 +47,15 @@ public class MenuManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    // Método para abrir/fechar o painel de som
+    public void TogglePainelSom()
+    {
+        if (painelSom != null)
+        {
+            bool statusAtual = painelSom.activeSelf;
+            painelSom.SetActive(!statusAtual);
+        }
     }
 }
