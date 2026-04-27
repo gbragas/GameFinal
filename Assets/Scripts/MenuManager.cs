@@ -7,6 +7,11 @@ public class MenuManager : MonoBehaviour
     public void Play()
     {
         Debug.Log("Carregando InitialScene...");
+
+        // Reseta o progresso para começar um novo jogo limpo
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResetarProgresso();
+
         SceneManager.LoadScene("InitialScene");
     }
 

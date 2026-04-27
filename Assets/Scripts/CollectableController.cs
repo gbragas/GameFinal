@@ -67,6 +67,12 @@ public class CollectableController : MonoBehaviour
 
     public void Collect()
     {
+        // Registra a coleta no GameManager (incrementa contadores + troca prefab)
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.RegistrarColeta();
+        }
+
         Destroy(gameObject);
     }
 }
