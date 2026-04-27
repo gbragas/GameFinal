@@ -15,8 +15,29 @@ using TMPro;
 /// </summary>
 public class GameManager : MonoBehaviour
 {
-    // ── Singleton ────────────────────────────────────────────────────────────
-    public static GameManager Instance { get; private set; }
+    // ── Singleton (auto-cria se não existir) ─────────────────────────────────
+    private static GameManager _instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                // Tenta encontrar um que já exista na cena
+                _instance = FindAnyObjectByType<GameManager>();
+
+                // Se ainda não existe, cria automaticamente
+                if (_instance == null)
+                {
+                    Debug.Log("[GameManager] Nenhuma instância encontrada — criando automaticamente.");
+                    GameObject go = new GameObject("GameManager (Auto)");
+                    _instance = go.AddComponent<GameManager>();
+                    // O Awake() cuida do DontDestroyOnLoad
+                }
+            }
+            return _instance;
+        }
+    }
 
     // ── Configuração ─────────────────────────────────────────────────────────
     [Header("Prefabs do Player (v0 a v6)")]
@@ -47,16 +68,46 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(gameObject);
             return;
         }
 
-        Instance = this;
+        _instance = this;
         DontDestroyOnLoad(gameObject);
 
+        // Carrega prefabs automaticamente se nenhum foi atribuído no Inspector
+        CarregarPrefabsSeNecessario();
+
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Se o array de prefabs está vazio (ex.: criado automaticamente, não pelo Inspector),
+    /// tenta carregar de Resources/PlayerPrefabs/.
+    /// </summary>
+    private void CarregarPrefabsSeNecessario()
+    {
+        // Verifica se pelo menos o primeiro prefab está preenchido
+        bool algumPreenchido = false;
+        for (int i = 0; i < playerPrefabs.Length; i++)
+        {
+            if (playerPrefabs[i] != null) { algumPreenchido = true; break; }
+        }
+
+        if (algumPreenchido) return; // já está configurado pelo Inspector
+
+        Debug.Log("[GameManager] Prefabs não configurados — tentando carregar de Resources/PlayerPrefabs/...");
+
+        for (int i = 0; i < playerPrefabs.Length; i++)
+        {
+            playerPrefabs[i] = Resources.Load<GameObject>($"PlayerPrefabs/Player-v{i}");
+            if (playerPrefabs[i] != null)
+                Debug.Log($"[GameManager] Carregado: Player-v{i}");
+            else
+                Debug.LogWarning($"[GameManager] NÃO encontrado: Resources/PlayerPrefabs/Player-v{i}");
+        }
     }
 
     private void OnDestroy()
@@ -137,30 +188,42 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Se o player atual JÁ é a versão correta, não troca
+        if (playerAtual.name.Contains($"v{versao}"))
+        {
+            Debug.Log($"[GameManager] Player já é v{versao}, sem necessidade de trocar.");
+            return;
+        }
+
         // Guarda posição, rotação e dados relevantes
         Vector3 posicao = playerAtual.transform.position;
         Quaternion rotacao = playerAtual.transform.rotation;
         Transform parentOriginal = playerAtual.transform.parent;
+
+        // Transfere a referência da câmera ANTES de destruir
+        PlayerMovement movimentoAntigo = playerAtual.GetComponent<PlayerMovement>();
+        Transform cameraRef = movimentoAntigo != null ? movimentoAntigo.cameraTransform : null;
+
+        // ★ DESATIVA o player antigo IMEDIATAMENTE para que FindWithTag
+        //   não o encontre de novo (Destroy é deferido ao fim do frame)
+        playerAtual.SetActive(false);
+        Destroy(playerAtual);
 
         // Instancia o novo player
         GameObject novoPlayer = Instantiate(playerPrefabs[versao], posicao, rotacao, parentOriginal);
         novoPlayer.name = $"Player-v{versao}";
         novoPlayer.tag = "Player";
 
-        // Transfere a referência da câmera (se o PlayerMovement usar uma)
-        PlayerMovement movimentoAntigo = playerAtual.GetComponent<PlayerMovement>();
+        // Transfere a referência da câmera
         PlayerMovement movimentoNovo = novoPlayer.GetComponent<PlayerMovement>();
-
-        if (movimentoAntigo != null && movimentoNovo != null)
+        if (cameraRef != null && movimentoNovo != null)
         {
-            movimentoNovo.cameraTransform = movimentoAntigo.cameraTransform;
+            movimentoNovo.cameraTransform = cameraRef;
         }
 
         // Se houver câmera Cinemachine/Follow, atualiza o target
         AtualizarCameraTarget(novoPlayer.transform);
 
-        // Destroi o player antigo
-        Destroy(playerAtual);
         playerAtual = novoPlayer;
 
         Debug.Log($"[GameManager] Player trocado para v{versao}");
@@ -168,6 +231,7 @@ public class GameManager : MonoBehaviour
 
     /// <summary>
     /// Tenta atualizar câmeras que seguem o player (Cinemachine ou script custom).
+    /// Força snap instantâneo para evitar deslocamento de câmera na troca.
     /// </summary>
     private void AtualizarCameraTarget(Transform novoTarget)
     {
@@ -177,7 +241,19 @@ public class GameManager : MonoBehaviour
         {
             vCam.Follow = novoTarget;
             vCam.LookAt = novoTarget;
-            Debug.Log("[GameManager] Cinemachine atualizado para novo player.");
+
+            // ★ Força a câmera a snapar INSTANTANEAMENTE para o novo target
+            //   sem fazer transição suave (que causava o deslocamento)
+            vCam.ForceCameraPosition(vCam.transform.position, vCam.transform.rotation);
+
+            // Também procura o CinemachineBrain e força update imediato
+            var brain = FindAnyObjectByType<Unity.Cinemachine.CinemachineBrain>();
+            if (brain != null)
+            {
+                brain.ManualUpdate();
+            }
+
+            Debug.Log("[GameManager] Cinemachine atualizado e snapado para novo player.");
         }
     }
 

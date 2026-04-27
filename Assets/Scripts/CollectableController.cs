@@ -12,6 +12,7 @@ public class CollectableController : MonoBehaviour
     public UnityEvent OnPlayerExit;
 
     private Vector3 startPosition;
+    private bool jaColetado = false; // Impede coleta dupla
 
     void Awake()
     {
@@ -53,7 +54,7 @@ public class CollectableController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OnPlayerEnter.Invoke();
+            Collect(); // Coleta automaticamente ao tocar
         }
     }
 
@@ -67,6 +68,9 @@ public class CollectableController : MonoBehaviour
 
     public void Collect()
     {
+        if (jaColetado) return; // Já foi coletado, ignora chamadas duplicadas
+        jaColetado = true;
+
         // Registra a coleta no GameManager (incrementa contadores + troca prefab)
         if (GameManager.Instance != null)
         {
