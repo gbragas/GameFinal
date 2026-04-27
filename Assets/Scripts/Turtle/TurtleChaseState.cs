@@ -37,11 +37,11 @@ public class TurtleChaseState : StateMachineBehaviour
 
         float distance = Vector3.Distance(player.position, animator.transform.position);
 
-        if (distance > 30f)
+        if (distance > 10f)
             animator.SetBool("IsChasing", false);
         
 
-        if (distance < 4.5f)
+        if (distance < 1.2f)
         {    
             agent.isStopped = true;
             agent.ResetPath();  
