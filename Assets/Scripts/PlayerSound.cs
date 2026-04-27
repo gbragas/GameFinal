@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
@@ -62,28 +63,25 @@ public class PlayerSound : MonoBehaviour
 
 				Debug.Log(surfaceMaterial.name);
 
-				if (
-						surfaceMaterial.name.Contains("Grass") ||
-						surfaceMaterial.name.Contains("Terrain")
-					)
+				List<string> grassTypes = new List<string> { "Grass", "Tree-4", "Tree-5", "Tree-6", "Terrain" };
+				List<string> rockTypes  = new List<string> { "Rock", "Stone" };
+				List<string> dirtTypes  = new List<string> { "Dirt", "Ground" };
+				List<string> woodTypes  = new List<string> { "Wood", "Tree-3", "Props", "Bridge" };
+
+
+				if ( grassTypes.Any(surfaceMaterial.name.Contains))
 				{
 					return GroundMaterial.Grass;
 				}
-				else if (
-						surfaceMaterial.name.Contains("Rock") ||
-						surfaceMaterial.name.Contains("branco")
-					)
+				else if ( rockTypes.Any(surfaceMaterial.name.Contains))
 				{
 					return GroundMaterial.Rock;
 				}
-				else if (
-						surfaceMaterial.name.Contains("Dirt") ||
-						surfaceMaterial.name.Contains("Ground")
-					)
+				else if ( dirtTypes.Any(surfaceMaterial.name.Contains))
 				{
 					return GroundMaterial.Dirt;
 				}
-				else if (surfaceMaterial.name.Contains("Wood"))
+				else if ( woodTypes.Any(surfaceMaterial.name.Contains))
 				{
 					return GroundMaterial.Wood;
 				}

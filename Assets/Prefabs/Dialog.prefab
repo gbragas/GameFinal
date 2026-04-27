@@ -212,6 +212,9 @@ MonoBehaviour:
   iniciarAutomaticamente: 1
   delayInicial: 2
   tempoExibicaoFinal: 0.3
+  aoFinalizarDialogo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!82 &8794017872204533161
 AudioSource:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ AudioSource:
   m_GameObject: {fileID: 1614719097304412590}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 06932c13c7bb8e62889f0a8a6cb3e51f, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: bddbc6ade1298938398ab9da72045b45, type: 3}
   m_PlayOnAwake: 0
