@@ -56,10 +56,46 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 172217303782348944, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7837701631035747409}
     - targetCorrespondingSourceObject: {fileID: 6391233746760414441, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8398247649550363163}
+    - targetCorrespondingSourceObject: {fileID: 6391233746760414441, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8733821786507684404}
+    - targetCorrespondingSourceObject: {fileID: 6391233746760414441, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1271673139079288304}
   m_SourcePrefab: {fileID: 100100000, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
+--- !u!1 &406262812223857198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 172217303782348944, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
+  m_PrefabInstance: {fileID: 558590774754851518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7837701631035747409
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406262812223857198}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8410154506439070708, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
 --- !u!1 &6877764513705627223 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6391233746760414441, guid: 8e049f09ccd734543a826193c51ac51b, type: 3}
@@ -78,3 +114,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BladeController
   speed: 100
+--- !u!64 &8733821786507684404
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877764513705627223}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5859233324537171573, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &1271673139079288304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6877764513705627223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1152ee81fcd1c4133abc5edcc9d50901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapKillTrigger
+  playerTag: Player
+  oneKillPerTouch: 1
