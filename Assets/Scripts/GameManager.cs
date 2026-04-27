@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Se carregou uma fase (não o menu), garante o cursor travado
-        if (scene.name != "Menu")
+        if (scene.name != "Menu" && scene.name != "Creditos")
         {
             // 1. Busca e desativa todos os MenuManagers e objetos "Menu"
             foreach (MenuManager m in FindObjectsByType<MenuManager>(FindObjectsSortMode.None))
