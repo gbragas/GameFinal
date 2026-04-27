@@ -23,10 +23,29 @@ public class SlimePatrolState : StateMachineBehaviour
         timer = 0;
         playerObj = GameObject.FindGameObjectWithTag("Player");
         agent.speed = 3f;
-        GameObject go = GameObject.FindGameObjectWithTag("SlimeWayPoints");
-        foreach (Transform waypoint in go.transform)
+        wayPoints.Clear();
+
+        Transform waypointsRoot = null;
+
+        foreach (Transform t in animator.GetComponentsInChildren<Transform>())
         {
-            wayPoints.Add(waypoint);
+            if (t.CompareTag("SlimeWayPoints"))
+            {
+                waypointsRoot = t;
+                break;
+            }
+        }
+
+        if (waypointsRoot != null)
+        {
+            foreach (Transform waypoint in waypointsRoot)
+            {
+                wayPoints.Add(waypoint);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Slime {animator.name} não tem WayPoints!");
         }
 
         agent.isStopped = false;
@@ -41,7 +60,7 @@ public class SlimePatrolState : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(agent == null || wayPoints == null || wayPoints.Count == 0)
+        if (agent == null || wayPoints == null || wayPoints.Count == 0)
             return;
 
         if (agent.remainingDistance <= agent.stoppingDistance)
@@ -62,13 +81,13 @@ public class SlimePatrolState : StateMachineBehaviour
             Debug.Log("Player object not found.");
             animator.SetBool("IsChasing", false);
         }
-    
+
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       agent.SetDestination(agent.transform.position);
+        agent.SetDestination(agent.transform.position);
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
