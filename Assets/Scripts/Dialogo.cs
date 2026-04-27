@@ -82,8 +82,13 @@ public class Dialogo : MonoBehaviour
 
     // ── Ciclo de vida ─────────────────────────────────────────────────────────
 
-    private void Start()
+    private bool inicializado = false;
+
+    private void Preparar()
     {
+        if (inicializado) return;
+        inicializado = true;
+
         if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
 
@@ -111,7 +116,11 @@ public class Dialogo : MonoBehaviour
                 }
             }
         }
+    }
 
+    private void Start()
+    {
+        Preparar();
         if (iniciarAutomaticamente)
             StartCoroutine(IniciarComDelay());
     }
@@ -145,6 +154,7 @@ public class Dialogo : MonoBehaviour
 
     public void TocarDialogo()
     {
+        Preparar();
         if (!podeTocar) return;
 
         if (falas == null || falas.Length == 0)
@@ -212,6 +222,9 @@ public class Dialogo : MonoBehaviour
             for (int s = 0; s < segs.Length; s++)
             {
                 string texto = segs[s] ?? string.Empty;
+
+                // Traz o texto e fantasmas para a frente na hierarquia (UI renderiza por último = por cima)
+                TrazerParaFrente(textoAtivo);
 
                 // Mostra o texto e os fantasmas
                 textoAtivo.gameObject.SetActive(true);
@@ -386,6 +399,20 @@ public class Dialogo : MonoBehaviour
         if (original == null) return null;
         fantasmasGerados.TryGetValue(original, out var ghosts);
         return ghosts;
+    }
+
+    private void TrazerParaFrente(TextMeshProUGUI alvo)
+    {
+        if (alvo == null) return;
+        TextMeshProUGUI[] ghosts = ObterFantasmas(alvo);
+        if (ghosts != null)
+        {
+            foreach (var g in ghosts)
+            {
+                if (g != null) g.transform.SetAsLastSibling();
+            }
+        }
+        alvo.transform.SetAsLastSibling();
     }
 
     private void EsconderTexto(TextMeshProUGUI alvo)
