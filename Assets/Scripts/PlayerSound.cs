@@ -36,6 +36,9 @@ public class PlayerSound : MonoBehaviour
 	public List<AudioClip> dirtDrop;
 	public List<AudioClip> woodDrop;
 
+	public float maxRange = 0.25f;
+	public float minRange = 0.05f;
+
 	enum GroundMaterial
 	{
 		Grass, Rock, Dirt, Wood, Empty
@@ -110,7 +113,7 @@ public class PlayerSound : MonoBehaviour
 		// Debug.Log("PlayFootsetp");
 		AudioClip clip = null;
 
-		GroundMaterial surface = SurfaceSelect();
+		GroundMaterial surface = SurfaceSelect(1.5f);
 
 		switch (surface)
 		{
@@ -140,7 +143,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -180,7 +183,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -220,7 +223,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -261,7 +264,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -274,7 +277,7 @@ public class PlayerSound : MonoBehaviour
 		clip = spawnSounds[Random.Range(0, spawnSounds.Count)];
 
 		fxSource.clip = clip;
-		fxSource.volume = Random.Range(0.2f, 0.5f);
+		fxSource.volume = Random.Range(minRange, maxRange);
 		fxSource.pitch = Random.Range(0.8f, 1.2f);
 		fxSource.Play();
 	}
