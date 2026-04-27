@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     private Transform spawnPoint;
     private Quaternion initialRotation;
     [SerializeField] private float pushForce = 1000f;
+    private bool canRotate = true;
+    private bool isInSafeZone = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -100,16 +102,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void RotatePlayer()
     {
+        if (!canRotate) return;
+
         Vector3 forward = cameraTransform != null ? cameraTransform.forward : Vector3.forward;
         forward.y = 0f;
         forward.Normalize();
 
-        // 👉 só rotaciona se tiver input relevante
         if (moveInput.sqrMagnitude < 0.01f)
             return;
 
-        // 👉 direção baseada na câmera + input lateral
-        Vector3 direction = forward * Mathf.Max(0, moveInput.y) // ignora andar pra trás
+        Vector3 direction = forward * Mathf.Max(0, moveInput.y)
                         + cameraTransform.right * moveInput.x;
 
         if (direction.sqrMagnitude < 0.001f)
@@ -175,22 +177,22 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator KillPlayerRoutine()
     {
         animator.SetBool("isDead", true);
+
+        canRotate = false;
         SetMovementEnabled(false);
 
         yield return new WaitForSeconds(3f);
 
         if (spawnPoint != null)
         {
-            SetMovementEnabled(true);
-
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
+
             rb.position = spawnPoint.position;
             rb.rotation = initialRotation;
-        }
-        else
-        {
-            Debug.LogWarning("SpawnPoint não encontrado!");
+
+            canRotate = true;
+            SetMovementEnabled(true);
         }
 
         animator.SetBool("isDead", false);
@@ -205,6 +207,32 @@ public class PlayerMovement : MonoBehaviour
 
         // aplica força
         rb.AddForce(direction.normalized * pushForce, ForceMode.Impulse);
+    }
+
+    /// <summary>
+    /// Chamado quando o player entra em uma safe zone
+    /// </summary>
+    public void EnterSafeZone()
+    {
+        isInSafeZone = true;
+        Debug.Log("Player entrou na Safe Zone!");
+    }
+
+    /// <summary>
+    /// Chamado quando o player sai de uma safe zone
+    /// </summary>
+    public void ExitSafeZone()
+    {
+        isInSafeZone = false;
+        Debug.Log("Player saiu da Safe Zone!");
+    }
+
+    /// <summary>
+    /// Verifica se o player está em uma safe zone
+    /// </summary>
+    public bool IsInSafeZone()
+    {
+        return isInSafeZone;
     }
 
     // Update is called once per frame
