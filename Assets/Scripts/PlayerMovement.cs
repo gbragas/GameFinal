@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 
+    public float jumpForce = 6.5f;
     public float walkSpeed = 2.5f;
     public float runSpeed = 5f;
     public float rotationSpeed = 1f;
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded())
         {
             animator.SetTrigger("isJumping");
-            rb.AddForce(Vector3.up * 5f, ForceMode.Impulse);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
     }
 
