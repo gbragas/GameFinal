@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting;
     private float currentAnimX, currentAnimY;
     private float animXVelocity, animYVelocity;
+    private Transform spawnPoint;
+    private Quaternion initialRotation;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,6 +30,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
+        initialRotation = transform.rotation;
+        GameObject spawnObj = GameObject.FindGameObjectWithTag("SpawnPoint");
+
+        if (spawnObj != null)
+        {
+            spawnPoint = spawnObj.transform;
+        }
+        else
+        {
+            spawnPoint = null;
+            Debug.LogWarning("SpawnPoint não encontrado na cena!");
+        }
         rb = GetComponent<Rigidbody>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
@@ -122,10 +137,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (moveInput.sqrMagnitude > 0.001f)
         {
-           float locomotionAmount = isSprinting ? 1f : 0.5f;
+            float locomotionAmount = isSprinting ? 1f : 0.5f;
 
-           animInput.x = Mathf.Abs(moveInput.x) > 0.01f ? Mathf.Sign(moveInput.x) * locomotionAmount : 0f;
-           animInput.y = Mathf.Abs(moveInput.y) > 0.01f ? Mathf.Sign(moveInput.y) * locomotionAmount : 0f;
+            animInput.x = Mathf.Abs(moveInput.x) > 0.01f ? Mathf.Sign(moveInput.x) * locomotionAmount : 0f;
+            animInput.y = Mathf.Abs(moveInput.y) > 0.01f ? Mathf.Sign(moveInput.y) * locomotionAmount : 0f;
         }
 
         currentAnimX = Mathf.SmoothDamp(
@@ -151,6 +166,34 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void KillPlayer()
+    {
+        StartCoroutine(KillPlayerRoutine());
+    }
+
+    private IEnumerator KillPlayerRoutine()
+    {
+        animator.SetBool("isDead", true);
+        SetMovementEnabled(false);
+
+        yield return new WaitForSeconds(3f);
+
+        if (spawnPoint != null)
+        {
+            SetMovementEnabled(true);
+
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.position = spawnPoint.position;
+            rb.rotation = initialRotation;
+        }
+        else
+        {
+            Debug.LogWarning("SpawnPoint não encontrado!");
+        }
+
+        animator.SetBool("isDead", false);
+    }
     // Update is called once per frame
     void Update()
     {
