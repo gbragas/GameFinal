@@ -84,6 +84,13 @@ public class CollectableController : MonoBehaviour
             GameManager.Instance.RegistrarColeta(prefabParaCutscene);
         }
 
-        Destroy(gameObject);
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

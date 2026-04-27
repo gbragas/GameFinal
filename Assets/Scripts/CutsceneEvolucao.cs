@@ -597,7 +597,7 @@ public class CutsceneEvolucao : MonoBehaviour
         GameObject goTitulo = CriarElemento("TituloMemoria", painelRaiz.transform);
         textoTitulo = goTitulo.AddComponent<TextMeshProUGUI>();
         textoTitulo.text = "Memória";
-        textoTitulo.fontSize = 52;
+        textoTitulo.fontSize = 78;
         textoTitulo.color = corTituloMemoria;
         textoTitulo.alignment = TextAlignmentOptions.Center;
         textoTitulo.fontStyle = FontStyles.Bold;
@@ -605,8 +605,8 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtTitulo = goTitulo.GetComponent<RectTransform>();
         rtTitulo.anchorMin = new Vector2(0.5f, 1f);
         rtTitulo.anchorMax = new Vector2(0.5f, 1f);
-        rtTitulo.sizeDelta = new Vector2(600f, 80f);
-        rtTitulo.anchoredPosition = new Vector2(0f, -80f);
+        rtTitulo.sizeDelta = new Vector2(900f, 120f);
+        rtTitulo.anchoredPosition = new Vector2(0f, -120f);
 
         // ── Container para modelo 3D + imagem de memória ──
         // Layout: [Modelo 3D]   [Imagem de Memória]
@@ -619,8 +619,8 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtModelo = goModelo.GetComponent<RectTransform>();
         rtModelo.anchorMin = new Vector2(0.5f, 0.5f);
         rtModelo.anchorMax = new Vector2(0.5f, 0.5f);
-        rtModelo.sizeDelta = new Vector2(280f, 280f);
-        rtModelo.anchoredPosition = new Vector2(-180f, 20f);
+        rtModelo.sizeDelta = new Vector2(420f, 420f);
+        rtModelo.anchoredPosition = new Vector2(-270f, 30f);
 
         // Imagem de memória/lembrança (sprite)
         GameObject goMemoria = CriarElemento("ImagemMemoria", painelRaiz.transform);
@@ -630,13 +630,13 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtMemoria = goMemoria.GetComponent<RectTransform>();
         rtMemoria.anchorMin = new Vector2(0.5f, 0.5f);
         rtMemoria.anchorMax = new Vector2(0.5f, 0.5f);
-        rtMemoria.sizeDelta = new Vector2(500f, 360f); // Reduzi levemente de 550x400
-        rtMemoria.anchoredPosition = new Vector2(250f, -20f); // Desci de 60 para -20
+        rtMemoria.sizeDelta = new Vector2(750f, 540f); // Aumentado para o Canvas Scaler
+        rtMemoria.anchoredPosition = new Vector2(375f, -30f);
 
         // ── Legenda fixa embaixo da imagem ──
         GameObject goLegenda = CriarElemento("LegendaMemoria", painelRaiz.transform);
         textoLegenda = goLegenda.AddComponent<TextMeshProUGUI>();
-        textoLegenda.fontSize = 24;
+        textoLegenda.fontSize = 36;
         textoLegenda.color = Color.white;
         textoLegenda.alignment = TextAlignmentOptions.Center;
         textoLegenda.fontStyle = FontStyles.Italic;
@@ -644,8 +644,8 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtLegenda = goLegenda.GetComponent<RectTransform>();
         rtLegenda.anchorMin = new Vector2(0.5f, 0.5f);
         rtLegenda.anchorMax = new Vector2(0.5f, 0.5f);
-        rtLegenda.sizeDelta = new Vector2(550f, 100f);
-        rtLegenda.anchoredPosition = new Vector2(250f, -260f); // Desci para acompanhar a imagem
+        rtLegenda.sizeDelta = new Vector2(825f, 150f);
+        rtLegenda.anchoredPosition = new Vector2(375f, -390f); // Desci para acompanhar a imagem
 
         // Borda decorativa na imagem de memória
         Outline borda = goMemoria.AddComponent<Outline>();
@@ -660,9 +660,9 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtPlayerNovo = goPlayerNovo.GetComponent<RectTransform>();
         rtPlayerNovo.anchorMin = new Vector2(0.5f, 0.5f);
         rtPlayerNovo.anchorMax = new Vector2(0.5f, 0.5f);
-        rtPlayerNovo.sizeDelta = new Vector2(500f, 500f); // Voltou a ser quadrado para não esticar (mesmo aspect do RenderTexture)
+        rtPlayerNovo.sizeDelta = new Vector2(750f, 750f); // Voltou a ser quadrado para não esticar (mesmo aspect do RenderTexture)
         // Lado esquerdo
-        rtPlayerNovo.anchoredPosition = new Vector2(-380f, -20f);
+        rtPlayerNovo.anchoredPosition = new Vector2(-570f, -30f);
 
         GameObject goPlayerAntigo = CriarElemento("PlayerAntigo", painelRaiz.transform);
         rawPlayerAntigo = goPlayerAntigo.AddComponent<RawImage>();
@@ -670,8 +670,8 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtPlayerAntigo = goPlayerAntigo.GetComponent<RectTransform>();
         rtPlayerAntigo.anchorMin = new Vector2(0.5f, 0.5f);
         rtPlayerAntigo.anchorMax = new Vector2(0.5f, 0.5f);
-        rtPlayerAntigo.sizeDelta = new Vector2(500f, 500f);
-        rtPlayerAntigo.anchoredPosition = new Vector2(-380f, -20f);
+        rtPlayerAntigo.sizeDelta = new Vector2(750f, 750f);
+        rtPlayerAntigo.anchoredPosition = new Vector2(-570f, -30f);
     }
 
     private GameObject CriarElemento(string nome, Transform parent)
