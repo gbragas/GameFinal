@@ -193,6 +193,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetBool("isDead", false);
+
+        // PlayerSound.PlaySpawn(); // Arrumar
     }
     // Update is called once per frame
     void Update()
