@@ -8,7 +8,7 @@ public class TurtlePatrolState : StateMachineBehaviour
     List<Transform> wayPoints = new List<Transform>();
     Transform player;
     GameObject playerObj;
-    float chaseRange = 16f;
+    float chaseRange = 5f;
     UnityEngine.AI.NavMeshAgent agent;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -23,7 +23,7 @@ public class TurtlePatrolState : StateMachineBehaviour
         timer = 0;
         playerObj = GameObject.FindGameObjectWithTag("Player");
         agent.speed = 3f;
-        GameObject go = GameObject.FindGameObjectWithTag("WayPoints");
+        GameObject go = GameObject.FindGameObjectWithTag("TurtleWayPoints");
         foreach (Transform waypoint in go.transform)
         {
             wayPoints.Add(waypoint);
