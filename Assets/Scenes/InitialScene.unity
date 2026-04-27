@@ -796,7 +796,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -641.9293, y: -5.875, z: 81.39453, w: -31.625}
+  m_margin: {x: -808.0598, y: -5.875, z: 81.39453, w: -31.625}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -7817,7 +7817,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -384.85547, y: -5.875, z: 81.39453, w: -31.625}
+  m_margin: {x: -691.55066, y: -5.875, z: 32.83811, w: -31.625}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -9963,8 +9963,20 @@ PrefabInstance:
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: margemFinal
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: delayInicial
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeIn
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeOut
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: falas.Array.size
@@ -10085,6 +10097,10 @@ PrefabInstance:
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[5].segmentos.Array.data[2]'
       value: Mas porque ele cansou de esperar...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794017872204533161, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 8922046413407617630, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: m_SizeDelta.x
