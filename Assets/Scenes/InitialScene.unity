@@ -847,6 +847,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.3999996, y: 2.418603, z: 5.3999996}
   m_Center: {x: 2.5, y: 1.2093015, z: 2.5}
+--- !u!114 &159680414 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+  m_PrefabInstance: {fileID: 4478323335747975130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &162586925
 GameObject:
   m_ObjectHideFlags: 0
@@ -6740,6 +6751,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.3999996, y: 2.418603, z: 5.3999996}
   m_Center: {x: 2.5, y: 1.2093015, z: 2.5}
+--- !u!114 &1453968189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4183060622568781076, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+  m_PrefabInstance: {fileID: 4478323335747975130}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1458458588
 GameObject:
   m_ObjectHideFlags: 0
@@ -9512,8 +9534,120 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: iniciarAutomaticamente
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[0].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: ed1463dfb132047c0accbc20c8fe01bf, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[1].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 43a2b2b2406094882b53faff5b4b21b1, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 71c473814ae084073bcc5a188f141aa4, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[3].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 15c55b4807e2c4b178f0e8bd55169fec, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[4].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 2c96299b3856c46e9918dbc9c8f60458, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[5].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: cc6d82fdb5ef34cbbbb4ef99ab321029, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].textoAlvo
+      value: 
+      objectReference: {fileID: 159680414}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[3].textoAlvo
+      value: 
+      objectReference: {fileID: 159680414}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[4].textoAlvo
+      value: 
+      objectReference: {fileID: 159680414}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[5].textoAlvo
+      value: 
+      objectReference: {fileID: 1453968189}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[1].segmentos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].segmentos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[3].segmentos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[4].segmentos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[5].segmentos.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[0]'
+      value: "Mas afinal, quem \xE9 voc\xEA?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[1]'
+      value: "Voc\xEA se reconhece no reflexo..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[2]'
+      value: Ou apenas aceita a imagem que o vazio te oferece?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[0]'
+      value: "N\xE3o \xE9 que n\xE3o tenha som.."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[1]'
+      value: "\xC9 que as mem\xF3rias ainda n\xE3o aprenderam a ecoar neste lugar."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[2]'
+      value: Ou apenas aceita a imagem que o vazio te oferece?
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[3].segmentos.Array.data[0]'
+      value: "A pergunta n\xE3o \xE9 \"quem voc\xEA era antes de chegar\". "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[3].segmentos.Array.data[1]'
+      value: "\xC9 quem voc\xEA escolher\xE1 ser agora que nada sobrou."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[4].segmentos.Array.data[0]'
+      value: "N\xE3o tente se definir..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[4].segmentos.Array.data[1]'
+      value: "Apenas se encontre na sua pr\xF3pria imensid\xE3o."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[5].segmentos.Array.data[0]'
+      value: "Atr\xE1s de voc\xEA, o caminho se abre. \n"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[5].segmentos.Array.data[1]'
+      value: "N\xE3o porque voc\xEA o encontrou, mas porque ele cansou de esperar."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
