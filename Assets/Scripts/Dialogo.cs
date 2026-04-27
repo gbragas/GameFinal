@@ -116,10 +116,29 @@ public class Dialogo : MonoBehaviour
             StartCoroutine(IniciarComDelay());
     }
 
+    // ── API de configuração ───────────────────────────────────────────────────
+
+    /// <summary>
+    /// Desabilita o início automático. Chame ANTES do Start() rodar
+    /// (ou seja, logo após Instantiate, no mesmo frame).
+    /// </summary>
+    public void DesativarAutoStart()
+    {
+        iniciarAutomaticamente = false;
+    }
+
     private IEnumerator IniciarComDelay()
     {
         yield return new WaitForSeconds(delayInicial);
         TocarDialogo();
+    }
+
+    /// <summary>
+    /// Permite definir as falas via código (ex: vindo de uma cutscene).
+    /// </summary>
+    public void ConfigurarFalas(Fala[] novasFalas)
+    {
+        this.falas = novasFalas;
     }
 
     // ── API pública ───────────────────────────────────────────────────────────

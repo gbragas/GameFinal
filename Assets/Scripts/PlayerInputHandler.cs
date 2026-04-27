@@ -5,6 +5,7 @@ public class PlayerInputHandler : MonoBehaviour
 {
 
     public InputAction interagir;
+    public float interactRange = 2f;
 
     // private InteracaoPlayer interacao;
     private PlayerMovement movement;
@@ -22,22 +23,34 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        // interagir.Enable();
-        // interagir.performed += OnInteract;
+        interagir.Enable();
+        interagir.performed += OnInteract;
     }
 
     private void OnDisable()
     {
-        // interagir.performed -= OnInteract;
-        // interagir.Disable();
+        interagir.performed -= OnInteract;
+        interagir.Disable();
     }
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        // if(context.performed && interaction != null) interaction.TryInteract();
-        // if (interacao.atualNPC != null && context.performed) {
-        //     interacao.atualNPC.Interagir();
-        // }
+        if(context.performed)
+        {
+            // if(interaction != null) interaction.TryInteract();
+            
+            // Busca objetos interativos (Collectables) perto do jogador
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactRange);
+            foreach (var hitCollider in hitColliders)
+            {
+                CollectableController collectable = hitCollider.GetComponent<CollectableController>();
+                if (collectable != null)
+                {
+                    collectable.Collect();
+                    break; // interage apenas com o primeiro que encontrar
+                }
+            }
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
