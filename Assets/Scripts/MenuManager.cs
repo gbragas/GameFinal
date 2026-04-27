@@ -3,10 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Configurações de Som")]
+    [SerializeField] private GameObject painelSom;
+
+    private bool carregando = false;
+
     // Método para iniciar o jogo (Fase 1)
     public void Play()
     {
-        Debug.Log("Carregando InitialScene...");
+        if (carregando) return;
+        carregando = true;
+
+        Debug.Log($"[MenuManager] Play clicado. Objeto: {gameObject.name}, Pai: {(transform.parent != null ? transform.parent.name : "Nenhum")}");
+        Debug.Log($"[MenuManager] Cena atual: {SceneManager.GetActiveScene().name}. Carregando: InitialScene...");
+
+        // Reseta o progresso para começar um novo jogo limpo
+        if (GameManager.Instance != null)
+            GameManager.Instance.ResetarProgresso();
+
         SceneManager.LoadScene("InitialScene");
     }
 
@@ -33,5 +47,15 @@ public class MenuManager : MonoBehaviour
         #else
             Application.Quit();
         #endif
+    }
+
+    // Método para abrir/fechar o painel de som
+    public void TogglePainelSom()
+    {
+        if (painelSom != null)
+        {
+            bool statusAtual = painelSom.activeSelf;
+            painelSom.SetActive(!statusAtual);
+        }
     }
 }
