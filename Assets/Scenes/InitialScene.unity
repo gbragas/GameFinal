@@ -9122,6 +9122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bb2aed07cb2443bb1e92647822ef33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuManager
+  painelSom: {fileID: 0}
 --- !u!4 &1938263397
 Transform:
   m_ObjectHideFlags: 0

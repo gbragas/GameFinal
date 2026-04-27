@@ -59,7 +59,54 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1342774651384427630, guid: 73aa8a347844a4688820d75f5b351557, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4766947975030554615}
+    - targetCorrespondingSourceObject: {fileID: 8288380280959352226, guid: 73aa8a347844a4688820d75f5b351557, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6552688146821204266}
+    - targetCorrespondingSourceObject: {fileID: 8288380280959352226, guid: 73aa8a347844a4688820d75f5b351557, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6427668306542450740}
   m_SourcePrefab: {fileID: 100100000, guid: 73aa8a347844a4688820d75f5b351557, type: 3}
+--- !u!1 &4372028257843686861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8288380280959352226, guid: 73aa8a347844a4688820d75f5b351557, type: 3}
+  m_PrefabInstance: {fileID: 5740591418583355503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &6552688146821204266
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372028257843686861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2806953395882273590, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &6427668306542450740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4372028257843686861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1152ee81fcd1c4133abc5edcc9d50901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapKillTrigger
+  playerTag: Player
+  oneKillPerTouch: 1
 --- !u!1 &6703840131087590401 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1342774651384427630, guid: 73aa8a347844a4688820d75f5b351557, type: 3}

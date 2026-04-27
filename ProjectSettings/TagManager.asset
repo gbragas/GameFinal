@@ -7,6 +7,7 @@ TagManager:
   - WayPoints
   - TurtleWayPoints
   - SlimeWayPoints
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
