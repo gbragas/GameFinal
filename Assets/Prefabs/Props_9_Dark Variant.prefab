@@ -59,6 +59,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7458061667951051996, guid: 8e93a17cf87cd40e9861b340da0f982b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1849333276983793963}
+    - targetCorrespondingSourceObject: {fileID: 7458061667951051996, guid: 8e93a17cf87cd40e9861b340da0f982b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5932354644806786060}
+    - targetCorrespondingSourceObject: {fileID: 7458061667951051996, guid: 8e93a17cf87cd40e9861b340da0f982b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1501950262482696333}
   m_SourcePrefab: {fileID: 100100000, guid: 8e93a17cf87cd40e9861b340da0f982b, type: 3}
 --- !u!1 &833920517915162699 stripped
 GameObject:
@@ -80,3 +86,39 @@ MonoBehaviour:
   rotationSpeed: 360
   moveSpeed: 2
   distance: 1.5
+--- !u!64 &5932354644806786060
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833920517915162699}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4685099658920931431, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!114 &1501950262482696333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833920517915162699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1152ee81fcd1c4133abc5edcc9d50901, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrapKillTrigger
+  playerTag: Player
+  oneKillPerTouch: 1
