@@ -19,20 +19,30 @@ using TMPro;
 public class CutsceneEvolucao : MonoBehaviour
 {
     // ── Configuração ─────────────────────────────────────────────────────────
-    [Header("Diálogo (Prefab)")]
-    [Tooltip("Prefab do Dialog que contém o componente Dialogo. " +
-             "Será instanciado dentro do Canvas durante a cutscene.")]
+    [Header("Sistema de Diálogo")]
+    [Tooltip("Prefab do Dialog que contém o componente Dialogo.")]
     public GameObject dialogPrefab;
 
-    [Header("Memórias — Imagens de Lembrança (uma por item, 0–5)")]
-    [Tooltip("Sprite exibido durante a cutscene de cada memória. " +
-             "Índice 0 = 1ª memória coletada, índice 5 = última.")]
-    public Sprite[] imagensMemoria = new Sprite[6];
+    [Header("Configuração das Memórias")]
+    [Tooltip("Lista de memórias. Cada uma contém sua imagem, legenda e sequência de áudio/texto.")]
+    public ConfiguracaoMemoria[] memorias = new ConfiguracaoMemoria[6];
 
     [Header("Tempos")]
     public float duracaoFade = 0.6f;
     public float tempoAntesDoDialogo = 1.0f;
     public float tempoDepoisDoDialogo = 0.8f;
+
+    [System.Serializable]
+    public class ConfiguracaoMemoria
+    {
+        public string nomeIdentificador = "Memória #";
+        public Sprite imagem;
+        [TextArea(2, 3)]
+        public string legendaFixa;
+        
+        [Header("Narração (Sistema de Diálogo)")]
+        public Fala[] falas;
+    }
 
     [Header("Modelo 3D do Collectable")]
     [Tooltip("Velocidade de rotação do collectable na cutscene.")]
@@ -50,12 +60,25 @@ public class CutsceneEvolucao : MonoBehaviour
     private Image imagemMemoria;
     private RawImage rawImageModelo3D;
     private TextMeshProUGUI textoTitulo;
+    private TextMeshProUGUI textoLegenda;
 
     // Render do modelo 3D
     private Camera cameraVitrine;
     private RenderTexture renderTexture;
     private GameObject modeloVitrineAtual;
     private Light luzVitrine;
+
+    // Render dos Players (Antigo e Novo)
+    private RawImage rawPlayerAntigo;
+    private RawImage rawPlayerNovo;
+    private Camera cameraPlayerAntigo;
+    private RenderTexture renderPlayerAntigo;
+    private GameObject modeloPlayerAntigo;
+    private Light luzPlayerAntigo;
+    private Camera cameraPlayerNovo;
+    private RenderTexture renderPlayerNovo;
+    private GameObject modeloPlayerNovo;
+    private Light luzPlayerNovo;
 
     // Diálogo instanciado
     private GameObject dialogoInstanciado;
@@ -77,6 +100,11 @@ public class CutsceneEvolucao : MonoBehaviour
         canvas = GetComponentInParent<Canvas>();
         CriarUI();
         CriarCameraVitrine();
+        
+        // Cria as câmeras para renderizar os players
+        CriarCameraPlayer(ref cameraPlayerAntigo, ref renderPlayerAntigo, ref luzPlayerAntigo, rawPlayerAntigo, new Vector3(0f, -200f, 0f));
+        CriarCameraPlayer(ref cameraPlayerNovo, ref renderPlayerNovo, ref luzPlayerNovo, rawPlayerNovo, new Vector3(0f, -300f, 0f));
+        
         painelRaiz.SetActive(false);
     }
 
@@ -89,8 +117,12 @@ public class CutsceneEvolucao : MonoBehaviour
             renderTexture.Release();
             Destroy(renderTexture);
         }
-        if (cameraVitrine != null)
-            Destroy(cameraVitrine.gameObject);
+        if (renderPlayerAntigo != null) { renderPlayerAntigo.Release(); Destroy(renderPlayerAntigo); }
+        if (renderPlayerNovo != null) { renderPlayerNovo.Release(); Destroy(renderPlayerNovo); }
+
+        if (cameraVitrine != null) Destroy(cameraVitrine.gameObject);
+        if (cameraPlayerAntigo != null) Destroy(cameraPlayerAntigo.gameObject);
+        if (cameraPlayerNovo != null) Destroy(cameraPlayerNovo.gameObject);
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -102,25 +134,27 @@ public class CutsceneEvolucao : MonoBehaviour
     /// </summary>
     /// <param name="indiceMemoria">Qual memória (0–5) foi coletada.</param>
     /// <param name="collectablePrefab">O GameObject 3D do collectable (para exibir na vitrine).</param>
+    /// <param name="playerAntigoPrefab">Prefab do player antes da evolução.</param>
+    /// <param name="playerNovoPrefab">Prefab do player após a evolução.</param>
     /// <param name="onTerminar">Callback quando a cutscene acabar.</param>
-    public void Iniciar(int indiceMemoria, GameObject collectablePrefab, System.Action onTerminar)
+    public void Iniciar(int indiceMemoria, GameObject collectablePrefab, GameObject playerAntigoPrefab, GameObject playerNovoPrefab, System.Action onTerminar)
     {
         if (cutsceneAtiva) return;
-        StartCoroutine(ExecutarCutscene(indiceMemoria, collectablePrefab, onTerminar));
+        StartCoroutine(ExecutarCutscene(indiceMemoria, collectablePrefab, playerAntigoPrefab, playerNovoPrefab, onTerminar));
     }
 
     // Sobrecarga para compatibilidade (sem collectable 3D)
     public void Iniciar(int versaoAnterior, int versaoNova, System.Action onTerminar)
     {
         if (cutsceneAtiva) return;
-        StartCoroutine(ExecutarCutscene(versaoAnterior, null, onTerminar));
+        StartCoroutine(ExecutarCutscene(versaoAnterior, null, null, null, onTerminar));
     }
 
     // ─────────────────────────────────────────────────────────────────────────
     // Coroutine principal
     // ─────────────────────────────────────────────────────────────────────────
 
-    private IEnumerator ExecutarCutscene(int indiceMemoria, GameObject collectablePrefab, System.Action onTerminar)
+    private IEnumerator ExecutarCutscene(int indiceMemoria, GameObject collectablePrefab, GameObject playerAntigoPrefab, GameObject playerNovoPrefab, System.Action onTerminar)
     {
         cutsceneAtiva = true;
 
@@ -130,15 +164,31 @@ public class CutsceneEvolucao : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
+        // ── Pega os dados da memória atual ──
+        ConfiguracaoMemoria dados = (indiceMemoria >= 0 && indiceMemoria < memorias.Length) 
+            ? memorias[indiceMemoria] 
+            : null;
+
         // ── Configura imagem de lembrança ──
-        if (indiceMemoria >= 0 && indiceMemoria < imagensMemoria.Length && imagensMemoria[indiceMemoria] != null)
+        if (dados != null && dados.imagem != null)
         {
-            imagemMemoria.sprite = imagensMemoria[indiceMemoria];
+            imagemMemoria.sprite = dados.imagem;
             imagemMemoria.gameObject.SetActive(true);
         }
         else
         {
             imagemMemoria.gameObject.SetActive(false);
+        }
+
+        // ── Configura legenda ──
+        if (dados != null && !string.IsNullOrEmpty(dados.legendaFixa))
+        {
+            textoLegenda.text = dados.legendaFixa;
+            textoLegenda.gameObject.SetActive(true);
+        }
+        else
+        {
+            textoLegenda.gameObject.SetActive(false);
         }
 
         // ── Configura modelo 3D do collectable ──
@@ -152,6 +202,31 @@ public class CutsceneEvolucao : MonoBehaviour
             rawImageModelo3D.gameObject.SetActive(false);
         }
 
+        // ── Configura os Players Antigo e Novo ──
+        if (playerAntigoPrefab != null)
+        {
+            modeloPlayerAntigo = MontarVitrinePlayer(playerAntigoPrefab, cameraPlayerAntigo, luzPlayerAntigo);
+            rawPlayerAntigo.gameObject.SetActive(true);
+            rawPlayerAntigo.color = new Color(1f, 1f, 1f, 1f); // começa 100% opaco
+            rawPlayerAntigo.transform.localScale = Vector3.zero; // para o pop-in animado
+        }
+        else
+        {
+            rawPlayerAntigo.gameObject.SetActive(false);
+        }
+
+        if (playerNovoPrefab != null)
+        {
+            modeloPlayerNovo = MontarVitrinePlayer(playerNovoPrefab, cameraPlayerNovo, luzPlayerNovo);
+            rawPlayerNovo.gameObject.SetActive(true);
+            rawPlayerNovo.color = new Color(1f, 1f, 1f, 0f); // começa invisível (fade in depois)
+            rawPlayerNovo.transform.localScale = Vector3.one;
+        }
+        else
+        {
+            rawPlayerNovo.gameObject.SetActive(false);
+        }
+
         // ── Título ──
         textoTitulo.text = $"Memória #{indiceMemoria + 1}";
 
@@ -161,6 +236,7 @@ public class CutsceneEvolucao : MonoBehaviour
 
         // Esconde elementos para animação de entrada
         imagemMemoria.transform.localScale = Vector3.zero;
+        textoLegenda.transform.localScale = Vector3.zero;
         rawImageModelo3D.transform.localScale = Vector3.zero;
         textoTitulo.transform.localScale = Vector3.zero;
 
@@ -181,8 +257,34 @@ public class CutsceneEvolucao : MonoBehaviour
         // ═══ FASE 4: Imagem de memória aparece ═══
         if (imagemMemoria.gameObject.activeSelf)
         {
-            yield return AnimarEscala(imagemMemoria.transform, Vector3.zero, Vector3.one * 1.1f, 0.3f);
-            yield return AnimarEscala(imagemMemoria.transform, Vector3.one * 1.1f, Vector3.one, 0.15f);
+            yield return AnimarEscala(imagemMemoria.transform, Vector3.zero, Vector3.one * 1.05f, 0.3f);
+            yield return AnimarEscala(imagemMemoria.transform, Vector3.one * 1.05f, Vector3.one, 0.15f);
+            
+            if (textoLegenda.gameObject.activeSelf)
+                yield return AnimarEscala(textoLegenda.transform, Vector3.zero, Vector3.one, 0.25f);
+        }
+
+        // ═══ FASE 5: Fade-in do Player antigo e crossfade pro novo ═══
+        if (rawPlayerAntigo.gameObject.activeSelf)
+        {
+            // Pop-in do player antigo
+            yield return AnimarEscala(rawPlayerAntigo.transform, Vector3.zero, Vector3.one, 0.3f);
+            
+            // Crossfade suave
+            float t = 0f;
+            float tempoFade = 1.2f;
+            while (t < tempoFade)
+            {
+                t += Time.unscaledDeltaTime;
+                float p = t / tempoFade;
+                rawPlayerAntigo.color = new Color(1f, 1f, 1f, 1f - p);
+                if (rawPlayerNovo.gameObject.activeSelf)
+                    rawPlayerNovo.color = new Color(1f, 1f, 1f, p);
+                yield return null;
+            }
+            rawPlayerAntigo.color = new Color(1f, 1f, 1f, 0f);
+            if (rawPlayerNovo.gameObject.activeSelf)
+                rawPlayerNovo.color = new Color(1f, 1f, 1f, 1f);
         }
 
         // ═══ FASE 5: Espera antes do diálogo ═══
@@ -195,6 +297,18 @@ public class CutsceneEvolucao : MonoBehaviour
 
             // Instancia o prefab do diálogo dentro do Canvas
             dialogoInstanciado = Instantiate(dialogPrefab, painelRaiz.transform);
+            
+            // Garante que fique na frente de todos os outros elementos do painel
+            dialogoInstanciado.transform.SetAsLastSibling();
+
+            // Se o prefab tiver um Canvas próprio, vamos garantir que ele não conflite
+            Canvas c = dialogoInstanciado.GetComponent<Canvas>();
+            if (c != null)
+            {
+                c.overrideSorting = true;
+                c.sortingOrder = 999; // Valor alto para ficar na frente
+            }
+
             dialogoComponente = dialogoInstanciado.GetComponentInChildren<Dialogo>();
 
             if (dialogoComponente != null)
@@ -202,8 +316,16 @@ public class CutsceneEvolucao : MonoBehaviour
                 // Desativa auto-start ANTES do Start() rodar (mesmo frame)
                 dialogoComponente.DesativarAutoStart();
 
+                // ★ INJETA AS FALAS DA MEMÓRIA ATUAL ★
+                if (dados != null && dados.falas != null && dados.falas.Length > 0)
+                {
+                    dialogoComponente.ConfigurarFalas(dados.falas);
+                }
+
                 // Quando o diálogo acabar, marca a flag
                 dialogoComponente.OnDialogoFinalizado += () => dialogoTerminou = true;
+                
+                Debug.Log($"[CutsceneEvolucao] Iniciando diálogo: {dialogoInstanciado.name}");
                 dialogoComponente.TocarDialogo();
 
                 // Espera o diálogo terminar
@@ -211,6 +333,7 @@ public class CutsceneEvolucao : MonoBehaviour
                 {
                     yield return null;
                 }
+                Debug.Log("[CutsceneEvolucao] Diálogo finalizado.");
             }
             else
             {
@@ -236,6 +359,13 @@ public class CutsceneEvolucao : MonoBehaviour
 
         // Limpa
         LimparVitrine();
+        if (modeloPlayerAntigo != null) Destroy(modeloPlayerAntigo);
+        if (modeloPlayerNovo != null) Destroy(modeloPlayerNovo);
+        if (cameraPlayerAntigo != null) cameraPlayerAntigo.enabled = false;
+        if (cameraPlayerNovo != null) cameraPlayerNovo.enabled = false;
+        if (luzPlayerAntigo != null) luzPlayerAntigo.enabled = false;
+        if (luzPlayerNovo != null) luzPlayerNovo.enabled = false;
+
         painelRaiz.SetActive(false);
         cutsceneAtiva = false;
 
@@ -278,7 +408,8 @@ public class CutsceneEvolucao : MonoBehaviour
         goLuz.transform.localRotation = Quaternion.Euler(30f, 0f, 0f);
         luzVitrine = goLuz.AddComponent<Light>();
         luzVitrine.type = LightType.Directional;
-        luzVitrine.intensity = 1.5f;
+        luzVitrine.intensity = 0.1f; // Reduzido de 1.5 para 0.8
+        luzVitrine.color = new Color(1f, 0.98f, 0.95f); // Tom levemente quente
         luzVitrine.cullingMask = 1 << 31;
         luzVitrine.enabled = false;
     }
@@ -343,6 +474,68 @@ public class CutsceneEvolucao : MonoBehaviour
         {
             SetLayerRecursive(child.gameObject, layer);
         }
+    }
+
+    // ─────────────────────────────────────────────────────────────────────────
+    // Sistema de Vitrine 3D para os Players (Animação de Transição)
+    // ─────────────────────────────────────────────────────────────────────────
+
+    private void CriarCameraPlayer(ref Camera cam, ref RenderTexture rt, ref Light luz, RawImage rawTarget, Vector3 basePos)
+    {
+        rt = new RenderTexture(512, 512, 24);
+        rt.antiAliasing = 4;
+        rawTarget.texture = rt;
+
+        GameObject goCam = new GameObject("CutscenePlayer_Camera");
+        goCam.transform.position = basePos;
+        cam = goCam.AddComponent<Camera>();
+        cam.targetTexture = rt;
+        cam.clearFlags = CameraClearFlags.SolidColor;
+        cam.backgroundColor = Color.clear;
+        cam.cullingMask = 1 << 31; // layer 31
+        cam.fieldOfView = 50f;
+        cam.nearClipPlane = 0.1f;
+        cam.farClipPlane = 50f;
+        cam.enabled = false;
+
+        GameObject goLuz = new GameObject("CutscenePlayer_Luz");
+        goLuz.transform.SetParent(goCam.transform);
+        goLuz.transform.localPosition = new Vector3(0f, 3f, -2f);
+        goLuz.transform.localRotation = Quaternion.Euler(30f, 0f, 0f);
+        luz = goLuz.AddComponent<Light>();
+        luz.type = LightType.Directional;
+        luz.intensity = 0.1f; // Reduzido de 1.2 para 0.7
+        luz.color = new Color(1f, 0.98f, 0.95f);
+        luz.cullingMask = 1 << 31;
+        luz.enabled = false;
+    }
+
+    private GameObject MontarVitrinePlayer(GameObject prefab, Camera cam, Light luz)
+    {
+        if (prefab == null) return null;
+        GameObject modelo = Instantiate(prefab);
+        modelo.name = "CutsceneVitrine_Player";
+
+        // Remove scripts de gameplay
+        foreach (var script in modelo.GetComponentsInChildren<MonoBehaviour>())
+            Destroy(script);
+        foreach (var col in modelo.GetComponentsInChildren<Collider>())
+            Destroy(col);
+        foreach (var rb in modelo.GetComponentsInChildren<Rigidbody>())
+            Destroy(rb);
+
+        SetLayerRecursive(modelo, 31);
+
+        // Posiciona na frente da câmera (olhando para ela)
+        modelo.transform.localScale = Vector3.one * 2.2f; // Leve redução para caber melhor no frame quadrado
+        modelo.transform.position = cam.transform.position + cam.transform.forward * 6.5f; // Um pouco mais longe
+        modelo.transform.position -= new Vector3(0f, 2.0f, 0f); // Centralizado verticalmente
+        modelo.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+
+        cam.enabled = true;
+        luz.enabled = true;
+
+        return modelo;
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -437,13 +630,48 @@ public class CutsceneEvolucao : MonoBehaviour
         RectTransform rtMemoria = goMemoria.GetComponent<RectTransform>();
         rtMemoria.anchorMin = new Vector2(0.5f, 0.5f);
         rtMemoria.anchorMax = new Vector2(0.5f, 0.5f);
-        rtMemoria.sizeDelta = new Vector2(300f, 220f);
-        rtMemoria.anchoredPosition = new Vector2(180f, 20f);
+        rtMemoria.sizeDelta = new Vector2(500f, 360f); // Reduzi levemente de 550x400
+        rtMemoria.anchoredPosition = new Vector2(250f, -20f); // Desci de 60 para -20
+
+        // ── Legenda fixa embaixo da imagem ──
+        GameObject goLegenda = CriarElemento("LegendaMemoria", painelRaiz.transform);
+        textoLegenda = goLegenda.AddComponent<TextMeshProUGUI>();
+        textoLegenda.fontSize = 24;
+        textoLegenda.color = Color.white;
+        textoLegenda.alignment = TextAlignmentOptions.Center;
+        textoLegenda.fontStyle = FontStyles.Italic;
+        textoLegenda.enableWordWrapping = true;
+        RectTransform rtLegenda = goLegenda.GetComponent<RectTransform>();
+        rtLegenda.anchorMin = new Vector2(0.5f, 0.5f);
+        rtLegenda.anchorMax = new Vector2(0.5f, 0.5f);
+        rtLegenda.sizeDelta = new Vector2(550f, 100f);
+        rtLegenda.anchoredPosition = new Vector2(250f, -260f); // Desci para acompanhar a imagem
 
         // Borda decorativa na imagem de memória
         Outline borda = goMemoria.AddComponent<Outline>();
         borda.effectColor = new Color(1f, 0.84f, 0f, 0.6f);
         borda.effectDistance = new Vector2(3f, -3f);
+
+        // ── Container para os Players (RenderTexture) ──
+        // (PlayerNovo por trás, PlayerAntigo na frente, mas ancorados no mesmo lugar)
+        GameObject goPlayerNovo = CriarElemento("PlayerNovo", painelRaiz.transform);
+        rawPlayerNovo = goPlayerNovo.AddComponent<RawImage>();
+        rawPlayerNovo.color = new Color(1f, 1f, 1f, 0f);
+        RectTransform rtPlayerNovo = goPlayerNovo.GetComponent<RectTransform>();
+        rtPlayerNovo.anchorMin = new Vector2(0.5f, 0.5f);
+        rtPlayerNovo.anchorMax = new Vector2(0.5f, 0.5f);
+        rtPlayerNovo.sizeDelta = new Vector2(500f, 500f); // Voltou a ser quadrado para não esticar (mesmo aspect do RenderTexture)
+        // Lado esquerdo
+        rtPlayerNovo.anchoredPosition = new Vector2(-380f, -20f);
+
+        GameObject goPlayerAntigo = CriarElemento("PlayerAntigo", painelRaiz.transform);
+        rawPlayerAntigo = goPlayerAntigo.AddComponent<RawImage>();
+        rawPlayerAntigo.color = new Color(1f, 1f, 1f, 0f);
+        RectTransform rtPlayerAntigo = goPlayerAntigo.GetComponent<RectTransform>();
+        rtPlayerAntigo.anchorMin = new Vector2(0.5f, 0.5f);
+        rtPlayerAntigo.anchorMax = new Vector2(0.5f, 0.5f);
+        rtPlayerAntigo.sizeDelta = new Vector2(500f, 500f);
+        rtPlayerAntigo.anchoredPosition = new Vector2(-380f, -20f);
     }
 
     private GameObject CriarElemento(string nome, Transform parent)

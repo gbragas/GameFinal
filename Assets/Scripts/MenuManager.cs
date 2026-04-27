@@ -3,10 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
+    private bool carregando = false;
+
     // Método para iniciar o jogo (Fase 1)
     public void Play()
     {
-        Debug.Log("Carregando InitialScene...");
+        if (carregando) return;
+        carregando = true;
+
+        Debug.Log($"[MenuManager] Play clicado. Objeto: {gameObject.name}, Pai: {(transform.parent != null ? transform.parent.name : "Nenhum")}");
+        Debug.Log($"[MenuManager] Cena atual: {SceneManager.GetActiveScene().name}. Carregando: InitialScene...");
 
         // Reseta o progresso para começar um novo jogo limpo
         if (GameManager.Instance != null)

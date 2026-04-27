@@ -3,7 +3,7 @@ using TMPro;
 using System.Collections;
 
 /// <summary>
-/// Exibe na tela "Colete os itens (X/3)" usando TextMeshPro.
+/// Exibe na tela "Encontre suas memórias (X/3)" usando TextMeshPro.
 /// 
 /// ▸ Coloque este script num GameObject dentro do Canvas de cada mapa.
 /// ▸ Arraste o componente TextMeshProUGUI no campo "textoItens" no Inspector.
@@ -48,7 +48,7 @@ public class CollectableHUD : MonoBehaviour
         {
             Debug.LogWarning("[CollectableHUD] GameManager não encontrado! O texto não será atualizado.");
             if (textoItens != null)
-                textoItens.text = "Colete os itens (0/3)";
+                textoItens.text = "Encontre suas memórias (0/3)";
         }
     }
 
@@ -66,7 +66,7 @@ public class CollectableHUD : MonoBehaviour
     {
         if (textoItens == null) return;
 
-        textoItens.text = $"Colete os itens ({coletados}/{total})";
+        textoItens.text = $"Encontre suas memórias ({coletados}/{total})";
 
         // Flash verde ao coletar (só se não for a chamada inicial com 0)
         if (coletados > 0)

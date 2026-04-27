@@ -7,7 +7,7 @@ using TMPro;
 ///   • Total de itens coletados (0–6, somados entre todos os mapas)
 ///   • Itens coletados no mapa atual (0–3)
 ///   • Troca do modelo visual do Player (Player-v0 → Player-v6)
-///   • HUD "Colete os itens (X/3)"
+///   • HUD "Encontre suas memórias (X/3)"
 /// 
 /// ▸ Coloque num GameObject vazio na PRIMEIRA cena que carrega (ex.: Menu).
 /// ▸ Arraste os 7 prefabs (Player-v0 … Player-v6) no Inspector.
@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log($"[GameManager] OnSceneLoaded: {scene.name}");
         // Reseta a contagem do mapa atual
         ColetadosNoMapa = 0;
 
@@ -131,6 +132,52 @@ public class GameManager : MonoBehaviour
         {
             // Substitui pelo prefab correto (versão = TotalColetados)
             SubstituirPlayer();
+        }
+
+        // Se carregou uma fase (não o menu), garante o cursor travado
+        if (scene.name != "Menu")
+        {
+            // 1. Busca e desativa todos os MenuManagers e objetos "Menu"
+            foreach (MenuManager m in FindObjectsByType<MenuManager>(FindObjectsSortMode.None))
+            {
+                Debug.Log($"[GameManager] Desativando MenuManager em: {m.gameObject.name}");
+                m.gameObject.SetActive(false);
+            }
+
+            GameObject menuObj = GameObject.Find("Menu");
+            if (menuObj != null)
+            {
+                Debug.Log("[GameManager] Desativando objeto 'Menu' persistente.");
+                menuObj.SetActive(false);
+            }
+
+            // 2. Gerenciamento inteligente de câmera
+            // Tenta encontrar uma câmera no player (ou em seus filhos)
+            Camera playerCam = playerAtual != null ? playerAtual.GetComponentInChildren<Camera>() : null;
+            GameObject sceneCam = GameObject.Find("Main Camera");
+
+            if (playerCam != null)
+            {
+                // Se o player trouxe sua própria câmera, desliga a da cena
+                if (sceneCam != null && sceneCam != playerCam.gameObject)
+                {
+                    Debug.Log("[GameManager] Usando câmera embutida no prefab do Player.");
+                    sceneCam.SetActive(false);
+                }
+            }
+            else
+            {
+                // Se o player NÃO tem câmera (ex: usa Cinemachine na cena), mantém a Main Camera
+                if (sceneCam != null)
+                {
+                    Debug.Log("[GameManager] Player sem câmera própria. Mantendo Main Camera da cena ativa.");
+                    sceneCam.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            // Nada especial ao carregar o menu
         }
 
         // Notifica a HUD nova para atualizar
@@ -168,7 +215,7 @@ public class GameManager : MonoBehaviour
             // Congela o player durante a cutscene
             CongelarPlayer(true);
 
-            cutscene.Iniciar(indiceMemoria, collectablePrefab, () =>
+            cutscene.Iniciar(indiceMemoria, collectablePrefab, playerPrefabs[versaoAnterior], playerPrefabs[versaoNova], () =>
             {
                 // Callback: cutscene terminou → troca o prefab e libera
                 SubstituirPlayer();
@@ -294,12 +341,14 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Se o player atual JÁ é a versão correta, não troca
-        if (playerAtual.name.Contains($"v{versao}"))
+        // Se o player atual JÁ é a versão correta, não troca (exceto se for v0 e estivermos resetando)
+        if (playerAtual.name.Contains($"v{versao}") && TotalColetados > 0)
         {
             Debug.Log($"[GameManager] Player já é v{versao}, sem necessidade de trocar.");
             return;
         }
+
+        Debug.Log($"[GameManager] Substituindo player atual por {playerPrefabs[versao].name}...");
 
         // Guarda posição, rotação e parent do player
         Vector3 posicao = playerAtual.transform.position;

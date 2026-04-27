@@ -133,6 +133,14 @@ public class Dialogo : MonoBehaviour
         TocarDialogo();
     }
 
+    /// <summary>
+    /// Permite definir as falas via código (ex: vindo de uma cutscene).
+    /// </summary>
+    public void ConfigurarFalas(Fala[] novasFalas)
+    {
+        this.falas = novasFalas;
+    }
+
     // ── API pública ───────────────────────────────────────────────────────────
 
     public void TocarDialogo()
