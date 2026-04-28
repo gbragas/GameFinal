@@ -62,8 +62,7 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if(movement != null)
         {
-            if(context.performed) movement.SetSprinting(true);
-            else if(context.canceled) movement.SetSprinting(false);
+            movement.SetSprinting(context.ReadValueAsButton());
         }
     }
 

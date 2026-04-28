@@ -55,7 +55,7 @@ public class CollectableHUD : MonoBehaviour
     private void OnDestroy()
     {
         // Desinscreve para evitar erros ao destruir
-        if (GameManager.Instance != null)
+        if (GameManager.HasInstance)
         {
             GameManager.Instance.OnItemColetado -= AtualizarTexto;
             GameManager.Instance.OnMapaCompleto -= MostrarMapaCompleto;
