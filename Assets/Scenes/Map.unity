@@ -1486,6 +1486,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &155693185 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5983403052301660777, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+  m_PrefabInstance: {fileID: 678848790}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &160437825
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7617,6 +7622,68 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 1009085864058569157, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!1001 &678848790
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 41.032185
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 110.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9609982
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.27655476
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 32.109
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4569148146580575632, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6382687131936768793, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      propertyPath: m_Name
+      value: Collectable (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 3815768977024775763, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+    - {fileID: 5222752609606569897, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5983403052301660777, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1490300181}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: acad765a6cfd849e3bde64a5f481a605, type: 3}
 --- !u!1001 &679548091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8013,7 +8080,7 @@ MonoBehaviour:
     imagem: {fileID: 21300000, guid: 205ccdf87a0ec4c2d8f1a089df923ea4, type: 3}
     legendaFixa: 
     falas:
-    - dublagem: {fileID: 8300000, guid: 08da75a78a9bb4a709d3e795a57233ad, type: 3}
+    - dublagem: {fileID: 8300000, guid: 36c4b14c84202441297ab471a6b38b6f, type: 3}
       segmentos:
       - "O azul era t\xE3o profundo que parecia n\xE3o ter fim. "
       - "Eu lembro de afundar a cabe\xE7a e.."
@@ -8042,7 +8109,7 @@ MonoBehaviour:
     imagem: {fileID: 0}
     legendaFixa: 
     falas:
-    - dublagem: {fileID: 0}
+    - dublagem: {fileID: 8300000, guid: 7ff118addb0f6481c9db977bcc9ea5ff, type: 3}
       segmentos:
       - "Terra \xFAmida nas m\xE3os. "
       - 'Eu lembro desse cheiro... '
@@ -8056,6 +8123,46 @@ MonoBehaviour:
       - 'Fazia meu rosto queimar '
       - 'de uma alegria que eu '
       - achei que tivesse esquecido
+      textoAlvo: {fileID: 881307282}
+  - nomeIdentificador: "Mem\xF3ria 4 - Mochila"
+    imagem: {fileID: 0}
+    legendaFixa: 
+    falas:
+    - dublagem: {fileID: 8300000, guid: aeb4c6f2122da406ab7fdc1924a17c37, type: 3}
+      segmentos:
+      - "Eles puxaram t\xE3o forte que a al\xE7a arrebentou. "
+      - Enquanto riam de mim, eu fechei os olhos
+      - " e rezei para um her\xF3i aparecer e me salvar. "
+      - "Mas ningu\xE9m veio. Naquele dia, o peso do que eu carregava"
+      - " caiu no ch\xE3o e eu entendi: n\xE3o existe ningu\xE9m vindo me buscar. "
+      - "Se eu quiser um her\xF3i, vou ter que me tornar um eu mesmo."
+      textoAlvo: {fileID: 881307282}
+  - nomeIdentificador: "Mem\xF3ria 5 - Lanterna "
+    imagem: {fileID: 0}
+    legendaFixa: 
+    falas:
+    - dublagem: {fileID: 8300000, guid: a75a718264456446593ebbc4d6c01e98, type: 3}
+      segmentos:
+      - "Eu apertava o bot\xE3o com for\xE7a, mas a luz s\xF3 piscava. "
+      - "No escuro do quarto, o sil\xEAncio era pesado e as sombras "
+      - 'nas paredes pareciam monstros prontos para me pegar. '
+      - "Eu descobri que a cor das coisas s\xF3 existe enquanto a luz resiste."
+      - ' Para ver quem eu realmente sou, eu precisei primeiro '
+      - aprender a encarar o que estava escondido no escuro.
+      textoAlvo: {fileID: 881307282}
+  - nomeIdentificador: "Mem\xF3ria 5 - Lanterna "
+    imagem: {fileID: 0}
+    legendaFixa: 
+    falas:
+    - dublagem: {fileID: 8300000, guid: 65353b87284bc4862807c4a1978a519f, type: 3}
+      segmentos:
+      - "O barulho do vidro estilha\xE7ando no ch\xE3o foi a \xFAltima coisa"
+      - " que ouvi antes do sil\xEAncio que nunca mais acabou. "
+      - "Palavras foram ditas, peda\xE7os voaram para todos os lados. "
+      - "N\xE3o dava mais para colar. "
+      - "N\xE3o dava para consertar. Algo dentro de mim"
+      - ' se quebrou junto com aquele copo...'
+      - " e eu preciso aceitar que eu tamb\xE9m sou as minhas cicatrizes."
       textoAlvo: {fileID: 881307282}
   duracaoFade: 0.5
   tempoAntesDoDialogo: 1
@@ -15620,6 +15727,68 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6611562796582349096, guid: 32812f864ffc68f45aa97b19014b7867, type: 3}
+--- !u!1001 &1490300180
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 155693185}
+    m_Modifications:
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901376847431469990, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+      propertyPath: m_Name
+      value: flower_pot
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+--- !u!4 &1490300181 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6092610541467095324, guid: 7f0c1de1a9fca7b4ab2d019103af7778, type: 3}
+  m_PrefabInstance: {fileID: 1490300180}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1491252955
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21750,3 +21919,4 @@ SceneRoots:
   - {fileID: 1687724777}
   - {fileID: 230855374}
   - {fileID: 682991991}
+  - {fileID: 678848790}
