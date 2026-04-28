@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 {
     // ── Singleton (auto-cria se não existir) ─────────────────────────────────
     private static GameManager _instance;
+    public static bool HasInstance => _instance != null;
     public static GameManager Instance
     {
         get
