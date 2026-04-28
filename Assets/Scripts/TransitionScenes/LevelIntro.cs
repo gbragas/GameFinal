@@ -75,10 +75,15 @@ public class LevelIntro : MonoBehaviour
         // Tocar a Timeline, se houver
         if (timelineCutscene != null)
         {
+            Debug.Log("[LevelIntro] Iniciando Timeline...");
             timelineCutscene.Play();
             
             // Espera até que a Timeline não esteja mais no estado 'Playing'
             yield return new WaitUntil(() => timelineCutscene.state != PlayState.Playing);
+            Debug.Log("[LevelIntro] Timeline finalizada!");
+            
+            // Desliga a cutscene para liberar a câmera virtual do Cinemachine
+            timelineCutscene.gameObject.SetActive(false);
         }
         else
         {
@@ -92,6 +97,7 @@ public class LevelIntro : MonoBehaviour
         // Libera o player
         if (timelineCutscene != null)
         {
+            Debug.Log("[LevelIntro] Descongelando player...");
             CongelarPlayer(false);
         }
 
