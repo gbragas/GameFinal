@@ -8229,7 +8229,7 @@ MonoBehaviour:
     imagem: {fileID: 21300000, guid: 7f51fda6fbef740fda5d1c5baa66b312, type: 3}
     legendaFixa: 
     falas:
-    - dublagem: {fileID: 0}
+    - dublagem: {fileID: 8300000, guid: e5ef9ad1876f1490fa22836bd3909846, type: 3}
       segmentos:
       - "O vento entrava pela janela com for\xE7a, bagun\xE7ando tudo."
       - "Eu colocava a cabe\xE7a para fora e sentia meu cabelo voar. "
@@ -21958,3 +21958,4 @@ SceneRoots:
   - {fileID: 230855374}
   - {fileID: 682991991}
   - {fileID: 678848790}
+  - {fileID: 317142404}
