@@ -237,12 +237,20 @@ public class Dialogo : MonoBehaviour
                 ? falaAtual.segmentos
                 : new string[] { string.Empty };
 
-            // Tempo disponível para cada segmento (dividido igualmente)
-            float duracaoPorSegmento = duracaoTotal / segs.Length;
+            // Calcula o peso total (baseado em caracteres) para dividir o tempo do áudio proporcionalmente
+            int pesoTotal = 0;
+            foreach (var seg in segs)
+            {
+                pesoTotal += (seg != null && seg.Length > 0) ? seg.Length : 1;
+            }
 
             for (int s = 0; s < segs.Length; s++)
             {
                 string texto = segs[s] ?? string.Empty;
+
+                // Tempo disponível para ESTE segmento, proporcional ao número de caracteres
+                int peso = (texto.Length > 0) ? texto.Length : 1;
+                float duracaoPorSegmento = duracaoTotal * ((float)peso / pesoTotal);
 
                 // Traz o texto e fantasmas para a frente na hierarquia (UI renderiza por último = por cima)
                 TrazerParaFrente(textoAtivo);
