@@ -135,6 +135,14 @@ public class TrocarDeCena : MonoBehaviour
 
         if (!string.IsNullOrEmpty(cenaAlvo))
         {
+            // Se for cena de Créditos, carregar direto sem transição
+            if (cenaAlvo.Equals("Creditos", System.StringComparison.OrdinalIgnoreCase))
+            {
+                Debug.Log($"[TrocarDeCena] Indo para cena \"{cenaAlvo}\" direto (sem transição).");
+                SceneManager.LoadScene(cenaAlvo);
+                return;
+            }
+
             // Usar TransitionManager se existir e a cena for transição
             Debug.Log($"[TrocarDeCena] Indo para cena \"{cenaAlvo}\" via Transição.");
             TransitionManager.targetSceneName = cenaAlvo;
