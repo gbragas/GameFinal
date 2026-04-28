@@ -17912,7 +17912,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674977023}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1674977025
 Camera:
   m_ObjectHideFlags: 0
@@ -18296,12 +18296,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643c3c56a6ea94a218a73b7ec9ff90dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntro
-  titulo: "Mem\xF3rias boas"
-  tempoExibicao: 2.5
-  duracaoFade: 1
-  tamanhoFonte: 80
-  corTexto: {r: 0.9150943, g: 0.7786942, b: 0.047481313, a: 1}
-  timelineCutscene: {fileID: 230855373}
 --- !u!4 &1687724777
 Transform:
   m_ObjectHideFlags: 0
@@ -21958,3 +21952,4 @@ SceneRoots:
   - {fileID: 230855374}
   - {fileID: 682991991}
   - {fileID: 678848790}
+  - {fileID: 317142404}
