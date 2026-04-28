@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FinalScene.unity
     guid: f0a003da112c644db88ff10b26278487
+  - enabled: 1
+    path: Assets/Scenes/TransitionScene.unity
+    guid: 2c284d50970e04848bba9efd122045b4
   - enabled: 0
     path: Assets/Scenes/NewPlayer.unity
     guid: 2e55ca5ca0015499bb7424037de9dfe2
