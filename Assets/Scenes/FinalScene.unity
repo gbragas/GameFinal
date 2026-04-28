@@ -2670,181 +2670,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4259419779162174420, guid: d325e0cfc6c108a43b390d48baa2bce5, type: 3}
   m_PrefabInstance: {fileID: 268137822}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &271717898
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1614719097304412590, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_Name
-      value: Dialog
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 75.36729
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 20.4861
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 88.35706
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_fontColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_fontColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_fontColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: duracaoFadeIn
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: duracaoFadeOut
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: falas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: tempoExibicaoFinal
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: usarEfeitoDigitacao
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: iniciarAutomaticamente
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: falas.Array.data[0].dublagem
-      value: 
-      objectReference: {fileID: 8300000, guid: 19b3279d997c94e52b42ed81813357b1, type: 3}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: falas.Array.data[0].segmentos.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[0]'
-      value: "Quem n\xF3s somos? Nossas melhores mem\xF3rias  ou nossas piores? "
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[1]'
-      value: "Somos apenas aquilo que nos lembramos? Ou as coisas que esquecemos
-        tamb\xE9m fazem parte?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[2]'
-      value: "Somos capazes de deixar algo para tr\xE1s? Ou isso ir\xE1 viver sempre
-        conosco?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[3]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[4]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[0].segmentos.Array.data[5]'
-      value: "Ou isso ir\xE1 viver sempre conosco?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[1].segmentos.Array.data[0]'
-      value: "Somos apenas aquilo que nos lembramos que aconteceu a n\xF3s?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: 'falas.Array.data[1].segmentos.Array.data[1]'
-      value: "Ou as coisas que esquecemos tamb\xE9m fazem parte?"
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1175295344}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 8794017872204533161, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-      propertyPath: m_Resource
-      value: 
-      objectReference: {fileID: 8300000, guid: 73c5eb2734f7c4fbba82bd86581452b7, type: 3}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
 --- !u!1001 &273357512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3219,7 +3044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d76f7722720e34476bc63ed1d9524817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogoTrigger
-  dialogo: {fileID: 550981075}
+  dialogo: {fileID: 1282460921}
   tipoGatilho: 1
   tagJogador: Player
   "teclaDi\xE1logo": 101
@@ -5973,17 +5798,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 662319099425387430, guid: 258cf905ed725ee449e45d0de78d0605, type: 3}
   m_PrefabInstance: {fileID: 539132572}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &550981075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
-  m_PrefabInstance: {fileID: 271717898}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 136d9d3688f684fd19b6b87711953483, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Dialogo
 --- !u!1001 &551151742
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12558,6 +12372,196 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4664541093566694551, guid: 2695a01f49f55514cb704e378e41ab83, type: 3}
   m_PrefabInstance: {fileID: 1159476698}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1159761372
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1614719097304412590, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_Name
+      value: Dialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 121.86945
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.01896
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.25647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: delayInicial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeOut
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: tempoExibicaoFinal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: iniciarAutomaticamente
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[0].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 73c5eb2734f7c4fbba82bd86581452b7, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[0].segmentos.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[0]'
+      value: Passamos uma vida inteira tentando esculpir quem somos, arrancando as
+        partes que doem e polindo apenas aquelas que brilham.
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[1]'
+      value: " Dizemos que somos a soma das nossas melhores mem\xF3rias, os instantes
+        de luz que escolhemos mostrar ao mundo. Mas e nossas piores lembran\xE7as? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[2]'
+      value: "E os peda\xE7os quebrados, as noites em claro e os arrependimentos?
+        N\xE3o teriam eles riscado a nossa alma com a mesma for\xE7a, desenhando
+        os nossos contornos com muito mais precis\xE3o do que a alegria jamais conseguiria?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[3]'
+      value: "Nos apegamos \xE0 ilus\xE3o de que somos apenas a hist\xF3ria que conseguimos
+        recitar de cor, feita somente daquilo que lembramos que nos aconteceu. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[4]'
+      value: "Ser\xE1 que as coisas que esquecemos n\xE3o s\xE3o as correntes profundas
+        que, mesmo em sil\xEAncio absoluto, ainda continuam guiando o nosso barco? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[5]'
+      value: "O esquecimento nunca \xE9 uma p\xE1gina arrancada, \xE9 apenas uma
+        tinta que desbotou. E mesmo invis\xEDvel, ele ainda mancha o papel debaixo
+        de todas as novas palavras que tentamos escrever."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[6]'
+      value: "E talvez... a grande resposta seja essa. N\xE3o somos feitos de metades
+        escolhidas. Somos a luz e a sombra. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[7]'
+      value: "O que lembramos com carinho e o que perdemos de vista pelo trauma.
+        N\xE3o deixamos o passado para tr\xE1s porque n\xE3o fomos feitos para ser
+        esvaziados. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[8]'
+      value: "N\xF3s o absorvemos. E \xE9 s\xF3 aceitando carregar o peso inteiro
+        de cada peda\xE7o de quem j\xE1 fomos, que finalmente nos tornamos inteiros
+        o suficiente para descobrir quem podemos ser."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1175295344}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794017872204533161, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 73c5eb2734f7c4fbba82bd86581452b7, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
 --- !u!1001 &1160514989
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13045,7 +13049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afba656e309d4d77ace70d7db266277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TrocarDeCena
-  nomeDaCena: Credito
+  nomeDaCena: Creditos
   indiceDeCena: -1
   tagJogador: Player
   delayAntesDeTrocar: 0
@@ -14372,6 +14376,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8046999384069601460, guid: 23b40b2eefc1b5647b43d5eef20c2430, type: 3}
   m_PrefabInstance: {fileID: 1281863102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1282460921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+  m_PrefabInstance: {fileID: 1159761372}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136d9d3688f684fd19b6b87711953483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogo
 --- !u!1001 &1282499497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22385,6 +22400,6 @@ SceneRoots:
   - {fileID: 1501574788}
   - {fileID: 763098775}
   - {fileID: 2142768055}
-  - {fileID: 271717898}
   - {fileID: 1160514989}
+  - {fileID: 1159761372}
   - {fileID: 1175295343}
