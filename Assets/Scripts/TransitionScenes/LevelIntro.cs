@@ -45,6 +45,19 @@ public class LevelIntro : MonoBehaviour
         {
             Debug.Log("[LevelIntro.OnDisable] Script desativado com timeline ainda ativa — parando timeline e descongelando player.");
             timelineCutscene.Stop();
+
+            // Fallback: Desativar câmeras da timeline se o script for desativado abruptamente
+            var vCams = timelineCutscene.GetComponentsInChildren<Unity.Cinemachine.CinemachineCamera>(true);
+            foreach (var cam in vCams)
+            {
+                cam.Priority = 0;
+                cam.enabled = false;
+            }
+            var normCams = timelineCutscene.GetComponentsInChildren<Camera>(true);
+            foreach (var cam in normCams)
+            {
+                cam.enabled = false;
+            }
         }
         CongelarPlayer(false);
         if (canvas != null)
@@ -95,7 +108,7 @@ public class LevelIntro : MonoBehaviour
             timelineCutscene.Play();
             
             // Espera até que a Timeline não esteja mais no estado 'Playing' COM TIMEOUT
-            float timelineTimeout = 3f; // máximo 30 segundos
+            float timelineTimeout = 6f; // máximo 30 segundos
             float timelineStartTime = Time.time;
             while (timelineCutscene.state == PlayState.Playing && 
                    (Time.time - timelineStartTime) < timelineTimeout)
@@ -113,9 +126,23 @@ public class LevelIntro : MonoBehaviour
                 Debug.Log("[LevelIntro] Timeline finalizada normalmente.");
             }
             
-            // ⚠️ NÃO desativar o GameObject — pode quebrar Cinemachine ou câmeras
-            // Apenas para a timeline
-            // timelineCutscene.gameObject.SetActive(false);
+            // CORREÇÃO DUPLA DE FALLBACK:
+            // 1. Não desativamos o GameObject da timeline (o que pode quebrar algo no projeto do amigo)
+            // 2. Zeramos a prioridade e desativamos todas as CinemachineCameras filhas da timeline.
+            // 3. Desativamos também Câmeras normais filhas da timeline.
+            // Isso devolve o controle limpo para a câmera do player.
+            var vCams = timelineCutscene.GetComponentsInChildren<Unity.Cinemachine.CinemachineCamera>(true);
+            foreach (var cam in vCams)
+            {
+                cam.Priority = 0;
+                cam.enabled = false;
+            }
+
+            var normCams = timelineCutscene.GetComponentsInChildren<Camera>(true);
+            foreach (var cam in normCams)
+            {
+                cam.enabled = false;
+            }
         }
         else
         {

@@ -214,7 +214,11 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetBool("isDead", false);
 
-        // PlayerSound.PlaySpawn(); // Arrumar
+        var playerSound = GetComponent<PlayerSound>();
+        if (playerSound != null)
+        {
+            playerSound.PlaySpawn();
+        }
     }
 
     public void Push(Vector3 direction)

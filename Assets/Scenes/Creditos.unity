@@ -993,7 +993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -13, y: 136}
+  m_AnchoredPosition: {x: -13, y: -713}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2080651954
@@ -1029,51 +1029,26 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-
-    Pellentesque
-    dictum ex a metus accumsan mattis.
-
-    Praesent pulvinar ante malesuada est
-    feugiat, nec accumsan justo blandit.
-
-    Cras suscipit libero vel sem vestibulum,
-    at blandit libero luctus.
-
-    Nullam ac massa ac leo maximus sollicitudin.
-
-    Donec
-    volutpat ipsum vitae magna varius, vel lacinia lorem pulvinar.
-
-
-    Etiam mattis
-    ipsum at eleifend tincidunt.
-
-
-    In sollicitudin justo non nibh vehicula aliquam.
-
-    Nam
-    vehicula tellus nec libero ullamcorper, sit amet finibus odio sollicitudin.
-
-    Nam
-    nec est quis lectus tristique porta.
-
-    Proin id ante vitae arcu bibendum suscipit
-    a ut augue.
-
-
-    Maecenas rutrum est vel egestas commodo.
-
-    Mauris posuere
-    sem id finibus blandit.
-
-    Aenean posuere est vitae urna rutrum euismod.
-
-    Morbi
-    vehicula risus et metus ullamcorper interdum.
-
-    Curabitur at felis sed massa
-    lobortis molestie.'
+  m_text: "=======================================\n           CR\xC9DITOS DO JOGO\n=======================================\n\nEQUIPE
+    \n---------------------------------------\nEnzo Fujita Garcia\nGabriel Braga
+    de Souza\nGabriel Cobo Figueiro\nHeitor Rodrigues Savegnago\nLucas Roberto Santos
+    Brandao\nLucas Santana Santos\n\nART E DESIGN\n---------------------------------------\nEnzo
+    Fujita Garcia\nGabriel Cobo Figueiro\nLucas Roberto Santos Brandao\nLucas Santana
+    Santos\n\nDIRE\xC7\xC3O\n---------------------------------------\nGabriel Cobo
+    Figueiro\n\nSOUND EFFECTS\n---------------------------------------\nHeitor Rodrigues
+    Savegnago\n\n\xC1UDIO\n---------------------------------------\nLucas Roberto
+    Santos Brandao\nLucas Santana Santos\n\nDEVELOPERS\n---------------------------------------\nEnzo
+    Fujita Garcia\nGabriel Braga de Souza\nGabriel Cobo Figueiro\nHeitor Rodrigues
+    Savegnago\nLucas Santana Santos\n\n=======================================\n         
+    ASSETS DE TERCEIROS\n=======================================\n\n\u2022 Low-Poly
+    Ghost Hunting Pack Lite\n  Publisher: DEVTRICKED\n\n\u2022 Low Poly Kitchen Set\n 
+    Publisher: HunterCraft Creations\n\n\u2022 Inferno World Free\n  Publisher: ithappy\n\n\u2022
+    Free Stylized Smoke Effects Pack\n  Publisher: Maiami Studio\n\n\u2022 Hyper
+    Casual FX\n  Publisher: Lana Studio\n\n\u2022 Low-Poly Objects Pack\n  Publisher:
+    Warcool\n\n\u2022 Magic Mirror Lite\n  Publisher: Digital Ruby\n\n\u2022 RPG
+    Tiny Hero Duo PBR\n  Publisher: Dungeon Mason\n\n\u2022 POLY STYLE - Platformer
+    Pack\n  Publisher: Batata Studio\n\n=======================================\n     
+    OBRIGADO POR JOGAR!\n======================================="
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ee2c6cdf998fe4fbb8642d07df086631, type: 2}
   m_sharedMaterial: {fileID: 8956989534112760835, guid: ee2c6cdf998fe4fbb8642d07df086631, type: 2}

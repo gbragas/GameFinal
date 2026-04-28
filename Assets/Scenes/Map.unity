@@ -2029,80 +2029,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5143461301359673804, guid: 0cf3fa172204a4c95b90a3b125e3c5f6, type: 3}
   m_PrefabInstance: {fileID: 782234816}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &220510009
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 329026452}
-    m_Modifications:
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.799298
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 6.73
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -7.5063095
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8282453734043031796, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-      propertyPath: m_Name
-      value: Props_14
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
---- !u!4 &220510010 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 657906292706535316, guid: d2be97095b8b6714481f3b961928dd87, type: 3}
-  m_PrefabInstance: {fileID: 220510009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &221302080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3286,7 +3212,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 134554563}
-  - {fileID: 220510010}
   m_Father: {fileID: 196711361}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &329181270
@@ -8218,9 +8143,7 @@ MonoBehaviour:
     - dublagem: {fileID: 8300000, guid: 36c4b14c84202441297ab471a6b38b6f, type: 3}
       segmentos:
       - "O azul era t\xE3o profundo que parecia n\xE3o ter fim. "
-      - "Eu lembro de afundar a cabe\xE7a e.."
-      - "pela primeira vez, o mundo n\xE3o era mais emba\xE7ado."
-      - 'Peixes, corais... '
+      - Peixes, corais...
       - "Uma explos\xE3o de cores que eu nem sabia que existiam. "
       - "Tinha tanta vida l\xE1 embaixo, esperando para ser vista. "
       - Por que eu fechei os olhos por tanto tempo?
@@ -8229,19 +8152,19 @@ MonoBehaviour:
     imagem: {fileID: 21300000, guid: 7f51fda6fbef740fda5d1c5baa66b312, type: 3}
     legendaFixa: 
     falas:
-    - dublagem: {fileID: 0}
+    - dublagem: {fileID: 8300000, guid: e5ef9ad1876f1490fa22836bd3909846, type: 3}
       segmentos:
       - "O vento entrava pela janela com for\xE7a, bagun\xE7ando tudo."
       - "Eu colocava a cabe\xE7a para fora e sentia meu cabelo voar. "
       - "Com a m\xFAsica no m\xE1ximo, eu fechava os olhos "
-      - 'e sentia cada fio sendo puxado pelo ar. '
+      - '..e sentia cada fio sendo puxado pelo ar. '
       - "Era uma turbul\xEAncia confortanta. "
       - 'Ali, sentindo o vento me despenteando, '
-      - eu tinha certeza de que existia.
+      - ..eu tinha certeza de que existia.
       - Ali, eu era livre.....
       textoAlvo: {fileID: 881307282}
   - nomeIdentificador: "Mem\xF3ria 3 - Flor"
-    imagem: {fileID: 0}
+    imagem: {fileID: 21300000, guid: 9221f55dbe1ee4c6f9b4261afc509c1f, type: 3}
     legendaFixa: 
     falas:
     - dublagem: {fileID: 8300000, guid: 7ff118addb0f6481c9db977bcc9ea5ff, type: 3}
@@ -8260,7 +8183,7 @@ MonoBehaviour:
       - achei que tivesse esquecido
       textoAlvo: {fileID: 881307282}
   - nomeIdentificador: "Mem\xF3ria 4 - Mochila"
-    imagem: {fileID: 0}
+    imagem: {fileID: 21300000, guid: 093583ce421de45c8931a9154b2cf4f9, type: 3}
     legendaFixa: 
     falas:
     - dublagem: {fileID: 8300000, guid: aeb4c6f2122da406ab7fdc1924a17c37, type: 3}
@@ -8273,7 +8196,7 @@ MonoBehaviour:
       - "Se eu quiser um her\xF3i, vou ter que me tornar um eu mesmo."
       textoAlvo: {fileID: 881307282}
   - nomeIdentificador: "Mem\xF3ria 5 - Lanterna "
-    imagem: {fileID: 0}
+    imagem: {fileID: 21300000, guid: 2a86b3cbe5c7c4b35ab7098082cf3887, type: 3}
     legendaFixa: 
     falas:
     - dublagem: {fileID: 8300000, guid: a75a718264456446593ebbc4d6c01e98, type: 3}
@@ -8285,8 +8208,8 @@ MonoBehaviour:
       - ' Para ver quem eu realmente sou, eu precisei primeiro '
       - aprender a encarar o que estava escondido no escuro.
       textoAlvo: {fileID: 881307282}
-  - nomeIdentificador: "Mem\xF3ria 5 - Lanterna "
-    imagem: {fileID: 0}
+  - nomeIdentificador: "Mem\xF3ria 6 - Copo de Vidro "
+    imagem: {fileID: 21300000, guid: cf7654be6bc80401f883e33723a5c2b6, type: 3}
     legendaFixa: 
     falas:
     - dublagem: {fileID: 8300000, guid: 65353b87284bc4862807c4a1978a519f, type: 3}
@@ -8301,7 +8224,7 @@ MonoBehaviour:
       textoAlvo: {fileID: 881307282}
   duracaoFade: 0.5
   tempoAntesDoDialogo: 1
-  tempoDepoisDoDialogo: 0.8
+  tempoDepoisDoDialogo: 0.5
   rotacaoVitrine: 60
   corFundo: {r: 0, g: 0, b: 0, a: 0.92}
   corTituloMemoria: {r: 1, g: 0.84, b: 0, a: 1}
@@ -21958,3 +21881,4 @@ SceneRoots:
   - {fileID: 230855374}
   - {fileID: 682991991}
   - {fileID: 678848790}
+  - {fileID: 317142404}
