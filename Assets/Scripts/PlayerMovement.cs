@@ -181,10 +181,27 @@ public class PlayerMovement : MonoBehaviour
         canRotate = false;
         SetMovementEnabled(false);
 
+        var playerInput = GetComponent<UnityEngine.InputSystem.PlayerInput>();
+        if (playerInput != null) playerInput.enabled = false;
+
+        var inputControllers = FindObjectsByType<Unity.Cinemachine.CinemachineInputAxisController>(FindObjectsSortMode.None);
+        foreach (var ctrl in inputControllers)
+        {
+            ctrl.enabled = false;
+        }
+
         yield return new WaitForSeconds(3f);
 
         if (spawnPoint != null)
         {
+            SetMovementEnabled(true);
+
+            if (playerInput != null) playerInput.enabled = true;
+            foreach (var ctrl in inputControllers)
+            {
+                if (ctrl != null) ctrl.enabled = true;
+            }
+
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
 
