@@ -1209,6 +1209,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2361210368917107374, guid: cc78880d476ac48c3a8087991862b46c, type: 3}
       insertIndex: -1
       addedObject: {fileID: -8328232248653745606}
+    - targetCorrespondingSourceObject: {fileID: 2361210368917107374, guid: cc78880d476ac48c3a8087991862b46c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8395255121426703322}
   m_SourcePrefab: {fileID: 100100000, guid: cc78880d476ac48c3a8087991862b46c, type: 3}
 --- !u!4 &2052296393615700533 stripped
 Transform:
@@ -1408,6 +1411,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 550578707500830854}
   animator: {fileID: 2400864065164704472}
   animationSmooth: 0.08
+  pushForce: 1000
 --- !u!82 &7056504576246863980
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1731,6 +1735,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 031d5e62d087bfd428de9660c9b6782a, type: 3}
   - {fileID: 8300000, guid: 693c6f7e2ed54e54b904b354313d4d9b, type: 3}
   - {fileID: 8300000, guid: 4c8cbf7de5264a54697e3338f2ed2866, type: 3}
+  maxRange: 0.25
+  minRange: 0.05
 --- !u!82 &-8328232248653745606
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1828,3 +1834,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &-8395255121426703322
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4371398101108174816}
+  m_Enabled: 1
