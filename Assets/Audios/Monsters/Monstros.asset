@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-9034822214621847848
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mixkit-aggressive-beast-roar-13_{-9034822214621847848}
+  m_AudioClip: {fileID: 8300000, guid: bf9a0ecc293c408ca94c7cf27e1c3986, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5025367121788840474
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mixkit-cartoon-character-sneeze-2209_{-5025367121788840474}
+  m_AudioClip: {fileID: 8300000, guid: f7215f1a08d430f4ea3b1fe5e2ddb98a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3896626606044805840
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mixkit-creepy-little-creature-2873_{3896626606044805840}
+  m_AudioClip: {fileID: 8300000, guid: 8a444f1ab527ec4ffa1c377228a17715, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Monstros
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 10
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: 0, y: 300}
+  m_AutomaticTriggerTimeRandomizationRange: {x: -5, y: 5}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -9034822214621847848}
+  - {fileID: -5025367121788840474}
+  - {fileID: 3896626606044805840}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 0
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 1
+  m_LoopCountRandomizationEnabled: 0
