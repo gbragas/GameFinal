@@ -119,6 +119,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &4680968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+  m_PrefabInstance: {fileID: 271717898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &7184394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2090,6 +2101,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8346139860629291646, guid: 7193bf8721103b448bbe633a1fe456bb, type: 3}
   m_PrefabInstance: {fileID: 181903378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &195191822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+  m_PrefabInstance: {fileID: 1578144444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &195191825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195191822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2afba656e309d4d77ace70d7db266277, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TrocarDeCena
+  nomeDaCena: Creditos
+  indiceDeCena: -1
+  tagJogador: Player
+  delayAntesDeTrocar: 0
+  apenasUmaVez: 1
+  aoIniciarTroca:
+    m_PersistentCalls:
+      m_Calls: []
+  aoCarregarCena:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &195191826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195191822}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.40478328, y: 4.6145706, z: 3.215452}
+  m_Center: {x: 0.0015403869, y: 1.8072786, z: -0.020920549}
 --- !u!1001 &207641354
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2739,12 +2799,16 @@ PrefabInstance:
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: delayInicial
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: duracaoFadeIn
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: duracaoFadeOut
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: falas.Array.size
@@ -2765,49 +2829,152 @@ PrefabInstance:
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: falas.Array.data[0].dublagem
       value: 
-      objectReference: {fileID: 8300000, guid: 19b3279d997c94e52b42ed81813357b1, type: 3}
+      objectReference: {fileID: 8300000, guid: 7ae2c06d567ae43339686cebf9b27567, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[1].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ae2c06d567ae43339686cebf9b27567, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ae2c06d567ae43339686cebf9b27567, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[1].textoAlvo
+      value: 
+      objectReference: {fileID: 4680968}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].textoAlvo
+      value: 
+      objectReference: {fileID: 4680968}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: falas.Array.data[0].segmentos.Array.size
-      value: 3
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[1].segmentos.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[2].segmentos.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[0]'
-      value: "Quem n\xF3s somos? Nossas melhores mem\xF3rias  ou nossas piores? "
+      value: 'Passamos uma vida inteira tentando esculpir quem somos, arrancando
+        as partes que doem e polindo apenas aquelas que brilham. '
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[1]'
-      value: "Somos apenas aquilo que nos lembramos? Ou as coisas que esquecemos
-        tamb\xE9m fazem parte?"
+      value: "Dizemos que somos a soma das nossas melhores mem\xF3rias, os instantes
+        de luz que escolhemos mostrar ao mundo. Mas e nossas piores lembran\xE7as? "
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[2]'
-      value: "Somos capazes de deixar algo para tr\xE1s? Ou isso ir\xE1 viver sempre
-        conosco?"
+      value: "E os peda\xE7os quebrados, as noites em claro e os arrependimentos?
+        N\xE3o teriam eles riscado a nossa alma com a mesma for\xE7a, desenhando
+        os nossos contornos com muito mais precis\xE3o do que a alegria jamais conseguiria?"
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[3]'
-      value: 
+      value: "Nos apegamos \xE0 ilus\xE3o de que somos apenas a hist\xF3ria que conseguimos
+        recitar de cor, feita somente daquilo que lembramos que nos aconteceu. "
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[4]'
-      value: 
+      value: "Ser\xE1 que as coisas que esquecemos n\xE3o s\xE3o as correntes profundas
+        que, mesmo em sil\xEAncio absoluto, ainda continuam guiando o nosso barco? "
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[0].segmentos.Array.data[5]'
-      value: "Ou isso ir\xE1 viver sempre conosco?"
+      value: "O esquecimento nunca \xE9 uma p\xE1gina arrancada, \xE9 apenas uma
+        tinta que desbotou. E mesmo invis\xEDvel, ele ainda mancha o papel debaixo
+        de todas as novas palavras que tentamos escrever."
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[6]'
+      value: "E talvez... a grande resposta seja essa. N\xE3o somos feitos de metades
+        escolhidas. Somos a luz e a sombra. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[7]'
+      value: "O que lembramos com carinho e o que perdemos de vista pelo trauma.
+        N\xE3o deixamos o passado para tr\xE1s porque n\xE3o fomos feitos para ser
+        esvaziados. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[8]'
+      value: "N\xF3s o absorvemos. E \xE9 s\xF3 aceitando carregar o peso inteiro
+        de cada peda\xE7o de quem j\xE1 fomos, que finalmente nos tornamos inteiros
+        o suficiente para descobrir quem podemos ser."
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[1].segmentos.Array.data[0]'
-      value: "Somos apenas aquilo que nos lembramos que aconteceu a n\xF3s?"
+      value: 'Passamos uma vida inteira tentando esculpir quem somos, arrancando
+        as partes que doem e polindo apenas aquelas que brilham. '
       objectReference: {fileID: 0}
     - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: 'falas.Array.data[1].segmentos.Array.data[1]'
-      value: "Ou as coisas que esquecemos tamb\xE9m fazem parte?"
+      value: "Dizemos que somos a soma das nossas melhores mem\xF3rias, os instantes
+        de luz que escolhemos mostrar ao mundo. Mas e nossas piores lembran\xE7as? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[2]'
+      value: "E os peda\xE7os quebrados, as noites em claro e os arrependimentos?
+        N\xE3o teriam eles riscado a nossa alma com a mesma for\xE7a, desenhando
+        os nossos contornos com muito mais precis\xE3o do que a alegria jamais conseguiria?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[0]'
+      value: 'Passamos uma vida inteira tentando esculpir quem somos, arrancando
+        as partes que doem e polindo apenas aquelas que brilham. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[1]'
+      value: "Dizemos que somos a soma das nossas melhores mem\xF3rias, os instantes
+        de luz que escolhemos mostrar ao mundo. Mas e nossas piores lembran\xE7as? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[2].segmentos.Array.data[2]'
+      value: "E os peda\xE7os quebrados, as noites em claro e os arrependimentos?
+        N\xE3o teriam eles riscado a nossa alma com a mesma for\xE7a, desenhando
+        os nossos contornos com muito mais precis\xE3o do que a alegria jamais conseguiria?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 195191822}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: aoFinalizarDialogo.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8794017872204533161, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 19b3279d997c94e52b42ed81813357b1, type: 3}
+      objectReference: {fileID: 8300000, guid: 7ae2c06d567ae43339686cebf9b27567, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3101,6 +3268,7 @@ GameObject:
   - component: {fileID: 309327019}
   - component: {fileID: 309327018}
   - component: {fileID: 309327021}
+  - component: {fileID: 309327022}
   m_Layer: 0
   m_Name: SafeZone
   m_TagString: Untagged
@@ -3174,6 +3342,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eeea5e8ae922461db20fcf59a23979a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SafeZone
+--- !u!114 &309327022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309327017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76f7722720e34476bc63ed1d9524817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogoTrigger
+  dialogo: {fileID: 805256954}
+  tipoGatilho: 1
+  tagJogador: Player
+  "teclaDi\xE1logo": 101
+  raioDistancia: 3
+  transformJogador: {fileID: 0}
+  dispararApenasUmaVez: 1
+  iconeInteragir: {fileID: 0}
+  aoDispararDialogo:
+    m_PersistentCalls:
+      m_Calls: []
+  aoFinalizarDialogo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &311764105
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5454,6 +5648,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1054329259130750322, guid: ce350acbeed68a34db38eaf0551ea452, type: 3}
   m_PrefabInstance: {fileID: 469817260}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &479238399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+  m_PrefabInstance: {fileID: 1578144444}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &479238401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 479238399}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_CustomShadowLayers: 0
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
+  m_RenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_ShadowRenderingLayersMask:
+    serializedVersion: 0
+    m_Bits: 1
+  m_Version: 4
+  m_LightLayerMask: 1
+  m_ShadowLayerMask: 1
+  m_RenderingLayers: 1
+  m_ShadowRenderingLayers: 1
 --- !u!1001 &479582779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8544,7 +8772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 643c3c56a6ea94a218a73b7ec9ff90dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelIntro
-  titulo: "Mem\xF3rias ruins"
+  titulo: "A Est\xE1tua"
   tempoExibicao: 2.5
   duracaoFade: 1
   tamanhoFonte: 80
@@ -17311,6 +17539,152 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8046999384069601460, guid: 23b40b2eefc1b5647b43d5eef20c2430, type: 3}
   m_PrefabInstance: {fileID: 1573551151}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1578144444
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_Name
+      value: PF_PortalGate_Simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035644770206660227, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: portalEffectColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035644770206660227, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: portalEffectColor.g
+      value: 0.78039217
+      objectReference: {fileID: 0}
+    - target: {fileID: 2035644770206660227, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: portalEffectColor.r
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468674793562794399, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3911486217772567896, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4082062069548470654, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263469586215116897, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 122.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.3255433
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.94552714
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -217.997
+      objectReference: {fileID: 0}
+    - target: {fileID: 5303846970860061371, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446448816083877663, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5563819603455256455, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5673258863154381940, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5982043263705912844, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7191242898005962021, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7934285317782932316, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359239877352642912, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 195191826}
+    - targetCorrespondingSourceObject: {fileID: 539152524218077282, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 195191825}
+    - targetCorrespondingSourceObject: {fileID: 6923693691316303551, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 479238401}
+  m_SourcePrefab: {fileID: 100100000, guid: 2557b316da33b034986a4b68ca98a463, type: 3}
 --- !u!1001 &1588745474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21934,86 +22308,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6246444131415988084, guid: 20c968d5baa722a4d87efa58a0f9e803, type: 3}
   m_PrefabInstance: {fileID: 2119230268}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2128674184
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2128674187}
-  - component: {fileID: 2128674186}
-  - component: {fileID: 2128674185}
-  m_Layer: 0
-  m_Name: InitDialog
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2128674185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128674184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d76f7722720e34476bc63ed1d9524817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DialogoTrigger
-  dialogo: {fileID: 805256954}
-  tipoGatilho: 1
-  tagJogador: Player
-  "teclaDi\xE1logo": 101
-  raioDistancia: 3
-  transformJogador: {fileID: 0}
-  dispararApenasUmaVez: 1
-  iconeInteragir: {fileID: 0}
-  aoDispararDialogo:
-    m_PersistentCalls:
-      m_Calls: []
-  aoFinalizarDialogo:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!65 &2128674186
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128674184}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 20.427353, y: 12.250255, z: 17.412193}
-  m_Center: {x: -9.526482, y: 5.6251273, z: -20.657883}
---- !u!4 &2128674187
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2128674184}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 130, y: 0, z: 20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2142768053
 GameObject:
   m_ObjectHideFlags: 0
@@ -22093,4 +22387,5 @@ SceneRoots:
   - {fileID: 763098775}
   - {fileID: 2142768055}
   - {fileID: 271717898}
-  - {fileID: 2128674187}
+  - {fileID: 1160514989}
+  - {fileID: 1578144444}
