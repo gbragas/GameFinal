@@ -8,8 +8,8 @@ public class AudioSlider : MonoBehaviour
 {
     [SerializeField]
     private AudioMixer Mixer;
-    [SerializeField]
-    private List<AudioSource> AudioSources;
+    // [SerializeField]
+    // private List<AudioSource> AudioSources;
     [SerializeField]
     private TextMeshProUGUI ValueText;
     [SerializeField]
@@ -17,7 +17,10 @@ public class AudioSlider : MonoBehaviour
 
     private void Start()
     {
-        Mixer.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume", 1) * 20));
+        // Mixer.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume", 1) * 20));
+
+        OnChangeSlider(PlayerPrefs.GetFloat("Volume", 1));
+
     }
 
     public void OnChangeSlider(float Value)
@@ -27,21 +30,25 @@ public class AudioSlider : MonoBehaviour
 
         switch (MixMode)
         {
-            case AudioMixMode.LinearAudioSourceVolume:
-                for (int i = 0; i < AudioSources.Count; i++)
-                {
-                    AudioSources[i].volume = Value;
-                }
-                break;
+            // case AudioMixMode.LinearAudioSourceVolume:
+            //     for (int i = 0; i < AudioSources.Count; i++)
+            //     {
+            //         AudioSources[i].volume = Value;
+            //     }
+            //     break;
             case AudioMixMode.LinearMixerVolume:
-                Mixer.SetFloat("Volume", (-80 + Value * 80));
+                Mixer.SetFloat("Volume", (-80 + Value * 100));
                 break;
             case AudioMixMode.LogrithmicMixerVolume:
-                Mixer.SetFloat("Volume", Mathf.Log10(Value) * 20);
+                Mixer.SetFloat("Volume", Mathf.Log10(Value+0.5f) * 20);
                 break;
         }
 
-        float a = Mathf.Log10(Value) * 20;
+        float a = Mathf.Log10(Value+0.5f) * 20;
+        float b = Mathf.Log10(Value*Mathf.Pow(10,20/100)) * 100;
+        float l = (-80 + Value * 100);
+
+        Debug.Log("V "+Value+" , A " + a + " , B " + b + ", L " + l);
 
         PlayerPrefs.SetFloat("Volume", Value);
         PlayerPrefs.Save();
@@ -50,7 +57,7 @@ public class AudioSlider : MonoBehaviour
 
     public enum AudioMixMode
     {
-        LinearAudioSourceVolume,
+        // LinearAudioSourceVolume,
         LinearMixerVolume,
         LogrithmicMixerVolume
     }

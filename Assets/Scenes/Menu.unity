@@ -657,10 +657,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 24100000, guid: 10bb68e8866f79797955532de3c4a0a4, type: 2}
     - target: {fileID: 546873264142974719, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
-      propertyPath: MixMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 546873264142974719, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
       propertyPath: AudioSources.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -1980,10 +1976,6 @@ PrefabInstance:
       propertyPath: Mixer
       value: 
       objectReference: {fileID: 24100000, guid: 06932c13c7bb8e62889f0a8a6cb3e51f, type: 2}
-    - target: {fileID: 546873264142974719, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
-      propertyPath: MixMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2034245336088468918, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2761,10 +2753,6 @@ PrefabInstance:
       propertyPath: Mixer
       value: 
       objectReference: {fileID: 24100000, guid: 046b093e89d54126085abfdb62a95ece, type: 2}
-    - target: {fileID: 546873264142974719, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
-      propertyPath: MixMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 546873264142974719, guid: 374e8c3b2c0792abaa14773f13def4f6, type: 3}
       propertyPath: 'AudioSources.Array.data[0]'
       value: 

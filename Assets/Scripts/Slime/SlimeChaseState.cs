@@ -32,6 +32,17 @@ public class SlimeChaseState : StateMachineBehaviour
             agent.isStopped = true;
             return;
         }
+
+        // Para se o player entrar em uma safe zone
+        if (SafeZone.Instance != null && SafeZone.Instance.IsPlayerInSafeZone())
+        {
+            animator.SetBool("IsChasing", false);
+            animator.SetBool("IsAttacking", false);
+            agent.isStopped = true;
+            agent.ResetPath();
+            return;
+        }
+
         agent.isStopped = false;
         agent.SetDestination(player.position);
 

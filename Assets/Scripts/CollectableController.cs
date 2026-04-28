@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +17,10 @@ public class CollectableController : MonoBehaviour
     [Header("Eventos de Proximidade")]
     public UnityEvent OnPlayerEnter;
     public UnityEvent OnPlayerExit;
+
+	[Header("Efeitos sonoros")]
+	public List<AudioClip> soundFx;
+	private AudioSource audioSource;
 
     private Vector3 startPosition;
     private bool jaColetado = false; // Impede coleta dupla
@@ -43,6 +49,7 @@ public class CollectableController : MonoBehaviour
     {
         // Salva a posição onde a bolsa foi colocada na cena
         startPosition = transform.position;
+		audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -73,6 +80,13 @@ public class CollectableController : MonoBehaviour
 
     public void Collect()
     {
+		AudioClip clip = soundFx[Random.Range(0, soundFx.Count)];
+
+        audioSource.clip = clip;
+        audioSource.volume = Random.Range(0.2f, 0.5f);
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
+        audioSource.Play();
+
         if (jaColetado) return; // Já foi coletado, ignora chamadas duplicadas
         jaColetado = true;
 
