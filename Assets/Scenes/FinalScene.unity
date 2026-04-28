@@ -2670,6 +2670,149 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4259419779162174420, guid: d325e0cfc6c108a43b390d48baa2bce5, type: 3}
   m_PrefabInstance: {fileID: 268137822}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &271717898
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1614719097304412590, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_Name
+      value: Dialog
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 75.36729
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 20.4861
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 88.35706
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561548916938211150, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749584322828902170, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeIn
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: duracaoFadeOut
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: tempoExibicaoFinal
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: usarEfeitoDigitacao
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: iniciarAutomaticamente
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[0].dublagem
+      value: 
+      objectReference: {fileID: 8300000, guid: 19b3279d997c94e52b42ed81813357b1, type: 3}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: falas.Array.data[0].segmentos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[0]'
+      value: "Quem n\xF3s somos? Nossas melhores mem\xF3rias  ou nossas piores? "
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[1]'
+      value: "Somos apenas aquilo que nos lembramos? Ou as coisas que esquecemos
+        tamb\xE9m fazem parte?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[2]'
+      value: "Somos capazes de deixar algo para tr\xE1s? Ou isso ir\xE1 viver sempre
+        conosco?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[3]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[4]'
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[0].segmentos.Array.data[5]'
+      value: "Ou isso ir\xE1 viver sempre conosco?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[0]'
+      value: "Somos apenas aquilo que nos lembramos que aconteceu a n\xF3s?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: 'falas.Array.data[1].segmentos.Array.data[1]'
+      value: "Ou as coisas que esquecemos tamb\xE9m fazem parte?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8794017872204533161, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 8300000, guid: 19b3279d997c94e52b42ed81813357b1, type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
 --- !u!1001 &273357512
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9095,6 +9238,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6610b4cf696aa4608b23a0b0e1f3b4ec, type: 3}
+--- !u!114 &805256954 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8065667253526421232, guid: 30a6bdefe14ee409c819d3b036dab222, type: 3}
+  m_PrefabInstance: {fileID: 271717898}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 136d9d3688f684fd19b6b87711953483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogo
 --- !u!1001 &805325710
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21780,6 +21934,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6246444131415988084, guid: 20c968d5baa722a4d87efa58a0f9e803, type: 3}
   m_PrefabInstance: {fileID: 2119230268}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2128674184
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2128674187}
+  - component: {fileID: 2128674186}
+  - component: {fileID: 2128674185}
+  m_Layer: 0
+  m_Name: InitDialog
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2128674185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128674184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d76f7722720e34476bc63ed1d9524817, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogoTrigger
+  dialogo: {fileID: 805256954}
+  tipoGatilho: 1
+  tagJogador: Player
+  "teclaDi\xE1logo": 101
+  raioDistancia: 3
+  transformJogador: {fileID: 0}
+  dispararApenasUmaVez: 1
+  iconeInteragir: {fileID: 0}
+  aoDispararDialogo:
+    m_PersistentCalls:
+      m_Calls: []
+  aoFinalizarDialogo:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &2128674186
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128674184}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 20.427353, y: 12.250255, z: 17.412193}
+  m_Center: {x: -9.526482, y: 5.6251273, z: -20.657883}
+--- !u!4 &2128674187
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128674184}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 130, y: 0, z: 20}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2142768053
 GameObject:
   m_ObjectHideFlags: 0
@@ -21858,3 +22092,5 @@ SceneRoots:
   - {fileID: 1501574788}
   - {fileID: 763098775}
   - {fileID: 2142768055}
+  - {fileID: 271717898}
+  - {fileID: 2128674187}
