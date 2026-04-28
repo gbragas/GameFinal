@@ -30,11 +30,27 @@ public class LevelIntro : MonoBehaviour
 
     private Canvas canvas;
     private TextMeshProUGUI textoUI;
+    private Coroutine rotinaPrincipal;
 
     private void Start()
     {
         CriarUI();
-        StartCoroutine(RotinaApresentacao());
+        rotinaPrincipal = StartCoroutine(RotinaApresentacao());
+    }
+
+    private void OnDisable()
+    {
+        // CRÍTICO: Garantir que o player seja descongelado mesmo se algo der errado
+        if (timelineCutscene != null && timelineCutscene.isActiveAndEnabled)
+        {
+            Debug.Log("[LevelIntro.OnDisable] Script desativado com timeline ainda ativa — parando timeline e descongelando player.");
+            timelineCutscene.Stop();
+        }
+        CongelarPlayer(false);
+        if (canvas != null)
+        {
+            Destroy(canvas.gameObject);
+        }
     }
 
     private void CriarUI()
@@ -78,12 +94,28 @@ public class LevelIntro : MonoBehaviour
             Debug.Log("[LevelIntro] Iniciando Timeline...");
             timelineCutscene.Play();
             
-            // Espera até que a Timeline não esteja mais no estado 'Playing'
-            yield return new WaitUntil(() => timelineCutscene.state != PlayState.Playing);
-            Debug.Log("[LevelIntro] Timeline finalizada!");
+            // Espera até que a Timeline não esteja mais no estado 'Playing' COM TIMEOUT
+            float timelineTimeout = 3f; // máximo 30 segundos
+            float timelineStartTime = Time.time;
+            while (timelineCutscene.state == PlayState.Playing && 
+                   (Time.time - timelineStartTime) < timelineTimeout)
+            {
+                yield return null;
+            }
             
-            // Desliga a cutscene para liberar a câmera virtual do Cinemachine
-            timelineCutscene.gameObject.SetActive(false);
+            if (Time.time - timelineStartTime >= timelineTimeout)
+            {
+                Debug.LogWarning("[LevelIntro] Timeline demorou demais! Parando forçadamente.");
+                timelineCutscene.Stop();
+            }
+            else
+            {
+                Debug.Log("[LevelIntro] Timeline finalizada normalmente.");
+            }
+            
+            // ⚠️ NÃO desativar o GameObject — pode quebrar Cinemachine ou câmeras
+            // Apenas para a timeline
+            // timelineCutscene.gameObject.SetActive(false);
         }
         else
         {
@@ -94,18 +126,18 @@ public class LevelIntro : MonoBehaviour
         // Fade out do Título
         yield return StartCoroutine(FadeTexto(1f, 0f, duracaoFade));
 
-        // Libera o player
-        if (timelineCutscene != null)
-        {
-            Debug.Log("[LevelIntro] Descongelando player...");
-            CongelarPlayer(false);
-        }
+        // Libera o player (sempre, não importa se houve timeline)
+        Debug.Log("[LevelIntro] Descongelando player...");
+        CongelarPlayer(false);
 
         // Limpar da memoria
         if (canvas != null)
         {
             Destroy(canvas.gameObject);
         }
+        
+        Debug.Log("[LevelIntro] Apresentação completa!");
+        rotinaPrincipal = null;
     }
 
     private IEnumerator FadeTexto(float startAlpha, float endAlpha, float duration)
