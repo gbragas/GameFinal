@@ -23,10 +23,29 @@ public class TurtlePatrolState : StateMachineBehaviour
         timer = 0;
         playerObj = GameObject.FindGameObjectWithTag("Player");
         agent.speed = 3f;
-        GameObject go = GameObject.FindGameObjectWithTag("TurtleWayPoints");
-        foreach (Transform waypoint in go.transform)
+        wayPoints.Clear();
+
+        Transform waypointsRoot = null;
+
+        foreach (Transform t in animator.GetComponentsInChildren<Transform>())
         {
-            wayPoints.Add(waypoint);
+            if (t.CompareTag("TurtleWayPoints"))
+            {
+                waypointsRoot = t;
+                break;
+            }
+        }
+
+        if (waypointsRoot != null)
+        {
+            foreach (Transform waypoint in waypointsRoot)
+            {
+                wayPoints.Add(waypoint);
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Turtle {animator.name} não tem WayPoints!");
         }
 
         agent.isStopped = false;

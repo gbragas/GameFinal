@@ -9,6 +9,9 @@ public class PlayerSound : MonoBehaviour
 	[Header("Weapon")]
 	public AudioClip[] swingSounds;
 
+	[Header("Fx")]
+	public List<AudioClip> spawnSounds;
+
 	[Header("Walking")]
 	public List<AudioClip> grassWalk;
 	public List<AudioClip> rockWalk;
@@ -21,23 +24,33 @@ public class PlayerSound : MonoBehaviour
 	public List<AudioClip> dirtRun;
 	public List<AudioClip> woodRun;
 
-	[Header("Jumpig")]
+	[Header("Jumping")]
 	public List<AudioClip> grassJump;
 	public List<AudioClip> rockJump;
 	public List<AudioClip> dirtJump;
 	public List<AudioClip> woodJump;
+
+	[Header("Droping")]
+	public List<AudioClip> grassDrop;
+	public List<AudioClip> rockDrop;
+	public List<AudioClip> dirtDrop;
+	public List<AudioClip> woodDrop;
+
+	public float maxRange = 0.25f;
+	public float minRange = 0.05f;
 
 	enum GroundMaterial
 	{
 		Grass, Rock, Dirt, Wood, Empty
 	}
 
-	private AudioSource weaponSource, footstepSource;
+	private AudioSource weaponSource, footstepSource, fxSource;
 
 	void Start()
 	{
 		weaponSource = GetComponents<AudioSource>()[0];
 		footstepSource = GetComponents<AudioSource>()[1];
+		fxSource = GetComponents<AudioSource>()[2];
 	}
 
 	void PlaySwing()
@@ -100,7 +113,7 @@ public class PlayerSound : MonoBehaviour
 		// Debug.Log("PlayFootsetp");
 		AudioClip clip = null;
 
-		GroundMaterial surface = SurfaceSelect();
+		GroundMaterial surface = SurfaceSelect(1.5f);
 
 		switch (surface)
 		{
@@ -130,7 +143,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -170,7 +183,7 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
@@ -210,9 +223,62 @@ public class PlayerSound : MonoBehaviour
 		if (surface != GroundMaterial.Empty)
 		{
 			footstepSource.clip = clip;
-			footstepSource.volume = Random.Range(0.2f, 0.5f);
+			footstepSource.volume = Random.Range(minRange, maxRange);
 			footstepSource.pitch = Random.Range(0.8f, 1.2f);
 			footstepSource.Play();
 		}
+	}
+
+	void PlayDeath()
+	{
+		Debug.Log("PlayDeath");
+		AudioClip clip = null;
+
+		GroundMaterial surface = SurfaceSelect(1.5f);
+
+		switch (surface)
+		{
+			case GroundMaterial.Grass:
+				clip = grassDrop[Random.Range(0, grassDrop.Count)];
+				// Debug.Log("Grass");
+				break;
+			case GroundMaterial.Rock:
+				clip = rockDrop[Random.Range(0, rockDrop.Count)];
+				// Debug.Log("Rock");
+				break;
+			case GroundMaterial.Dirt:
+				clip = dirtDrop[Random.Range(0, dirtDrop.Count)];
+				// Debug.Log("Dirt");
+				break;
+			case GroundMaterial.Wood:
+				clip = woodDrop[Random.Range(0, woodDrop.Count)];
+				// Debug.Log("Wood");
+				break;
+			default:
+				// Debug.Log("Default");
+				break;
+		}
+
+		// Debug.Log(surface);
+
+		if (surface != GroundMaterial.Empty)
+		{
+			footstepSource.clip = clip;
+			footstepSource.volume = Random.Range(minRange, maxRange);
+			footstepSource.pitch = Random.Range(0.8f, 1.2f);
+			footstepSource.Play();
+		}
+	}
+
+	public void PlaySpawn()
+	{
+		AudioClip clip = null;
+
+		clip = spawnSounds[Random.Range(0, spawnSounds.Count)];
+
+		fxSource.clip = clip;
+		fxSource.volume = Random.Range(minRange, maxRange);
+		fxSource.pitch = Random.Range(0.8f, 1.2f);
+		fxSource.Play();
 	}
 }

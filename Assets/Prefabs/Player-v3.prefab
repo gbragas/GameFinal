@@ -60,6 +60,22 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: bc905c5f8c1684637a5cb2f8c865ca2a, type: 2}
+    - target: {fileID: 8889724646520875258, guid: ae328f0648c234115be89ccabc219323, type: 3}
+      propertyPath: m_Height
+      value: 1.3444926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889724646520875258, guid: ae328f0648c234115be89ccabc219323, type: 3}
+      propertyPath: m_Radius
+      value: 0.3082168
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889724646520875258, guid: ae328f0648c234115be89ccabc219323, type: 3}
+      propertyPath: m_Center.x
+      value: 0.0071030855
+      objectReference: {fileID: 0}
+    - target: {fileID: 8889724646520875258, guid: ae328f0648c234115be89ccabc219323, type: 3}
+      propertyPath: m_Center.y
+      value: 0.6266673
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
