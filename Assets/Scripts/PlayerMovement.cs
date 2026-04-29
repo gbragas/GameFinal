@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        // Adiciona automaticamente o gerador de UI mobile
+        if (GetComponent<MobileControlsGenerator>() == null)
+        {
+            gameObject.AddComponent<MobileControlsGenerator>();
+        }
     }
 
     public void SetMoveInput(Vector2 input)
