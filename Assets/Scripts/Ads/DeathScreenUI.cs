@@ -30,6 +30,11 @@ public class DeathScreenUI : MonoBehaviour
     private bool contando = true;
     private bool finalizado;
 
+    // Estilo copiado do menu (carregado de Resources/UI).
+    private Sprite botaoSprite;
+    private TMP_FontAsset fonteMenu;
+    private static readonly Color CorTextoBotao = new Color(0.349f, 0.349f, 0.349f, 1f);
+
     /// <summary>Cria e mostra a tela de morte.</summary>
     public static DeathScreenUI Mostrar(Action onRevive, Action onRestart)
     {
@@ -44,6 +49,10 @@ public class DeathScreenUI : MonoBehaviour
     private void Build()
     {
         GarantirEventSystem();
+
+        // Carrega o estilo do menu (mesmo botão e fonte). Se faltar, usa o fallback.
+        botaoSprite = Resources.Load<Sprite>("UI/MenuButton");
+        fonteMenu = Resources.Load<TMP_FontAsset>("UI/MenuFont");
 
         canvas = gameObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -186,7 +195,7 @@ public class DeathScreenUI : MonoBehaviour
         rt.sizeDelta = size;
     }
 
-    private static TextMeshProUGUI NovoTexto(Transform parent, string texto, float tamanho, FontStyles estilo)
+    private TextMeshProUGUI NovoTexto(Transform parent, string texto, float tamanho, FontStyles estilo)
     {
         var go = new GameObject("Texto");
         go.transform.SetParent(parent, false);
@@ -199,41 +208,66 @@ public class DeathScreenUI : MonoBehaviour
         return tmp;
     }
 
-    private static Button NovoBotao(Transform parent, string texto, Vector2 pos, Color cor)
+    private Button NovoBotao(Transform parent, string texto, Vector2 pos, Color cor)
     {
         var go = new GameObject("Botao");
         go.transform.SetParent(parent, false);
         var img = go.AddComponent<Image>();
-        img.color = cor;
         var btn = go.AddComponent<Button>();
+        btn.targetGraphic = img;
+
+        bool comSprite = botaoSprite != null;
+        if (comSprite)
+        {
+            // Mesmo botão e mesmas cores de transição do menu.
+            img.sprite = botaoSprite;
+            img.type = Image.Type.Simple;
+            img.color = Color.white;
+
+            var cb = btn.colors;
+            cb.normalColor      = Color.white;
+            cb.highlightedColor = new Color(0.96f, 0.96f, 0.96f, 1f);
+            cb.pressedColor     = new Color(0.784f, 0.784f, 0.784f, 1f);
+            cb.selectedColor    = new Color(0.96f, 0.96f, 0.96f, 1f);
+            cb.disabledColor    = new Color(0.784f, 0.784f, 0.784f, 0.5f);
+            cb.colorMultiplier  = 1f;
+            cb.fadeDuration     = 0.1f;
+            btn.colors = cb;
+        }
+        else
+        {
+            img.color = cor; // fallback se o sprite não carregar
+        }
 
         var rt = img.rectTransform;
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
         rt.pivot = new Vector2(0.5f, 0.5f);
         rt.anchoredPosition = pos;
-        rt.sizeDelta = new Vector2(820, 130);
+        rt.sizeDelta = new Vector2(640, 140);
 
-        var label = NovoTexto(go.transform, texto, 46, FontStyles.Bold);
+        var label = NovoTexto(go.transform, texto, 44, FontStyles.Bold);
+        if (fonteMenu != null) label.font = fonteMenu;   // mesma fonte dos botões do menu
+        if (comSprite) label.color = CorTextoBotao;      // texto escuro como no menu
         Esticar(label.rectTransform);
 
         return btn;
     }
 
-    private static Button NovoBotaoComIcone(Transform parent, string texto, Vector2 pos, Color cor, Sprite icone)
+    private Button NovoBotaoComIcone(Transform parent, string texto, Vector2 pos, Color cor, Sprite icone)
     {
         var btn = NovoBotao(parent, texto, pos, cor);
 
-        // Ícone à esquerda do botão.
+        // Ícone de vídeo à esquerda do botão.
         var go = new GameObject("Icone");
         go.transform.SetParent(btn.transform, false);
         var img = go.AddComponent<Image>();
         img.sprite = icone;
-        img.color = Color.white;
+        img.color = botaoSprite != null ? CorTextoBotao : Color.white; // combina com o texto
         var rt = img.rectTransform;
         rt.anchorMin = rt.anchorMax = new Vector2(0f, 0.5f);
         rt.pivot = new Vector2(0.5f, 0.5f);
-        rt.anchoredPosition = new Vector2(80, 0);
-        rt.sizeDelta = new Vector2(70, 70);
+        rt.anchoredPosition = new Vector2(70, 0);
+        rt.sizeDelta = new Vector2(60, 60);
 
         return btn;
     }
