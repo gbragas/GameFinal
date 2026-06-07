@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Unity.Services.LevelPlay;
 
@@ -44,6 +45,7 @@ public class AdsManager : MonoBehaviour
     private Action rewardedAoGanhar;
     private Action rewardedAoFalhar;
     private bool recompensaGanha;
+    private bool rewardedResolvido;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Bootstrap()
@@ -85,8 +87,11 @@ public class AdsManager : MonoBehaviour
         // ---- Rewarded (reviver) ----
         rewarded = new LevelPlayRewardedAd(RewardedAdUnitId);
         rewarded.OnAdRewarded += (_, __) => recompensaGanha = true;
-        rewarded.OnAdClosed += _ => FinalizarRewarded();
-        rewarded.OnAdDisplayFailed += (_, __) => FinalizarRewarded(forcarFalha: true);
+        // OnAdClosed e OnAdRewarded podem vir em qualquer ordem (no Editor o
+        // mock dispara Closed ANTES de Rewarded). Resolvemos 1 frame depois
+        // para capturar a recompensa independente da ordem.
+        rewarded.OnAdClosed += _ => AgendarResolucaoRewarded();
+        rewarded.OnAdDisplayFailed += (_, __) => AgendarResolucaoRewarded();
         rewarded.LoadAd();
 
         Debug.Log("[AdsManager] LevelPlay inicializado.");
@@ -147,6 +152,7 @@ public class AdsManager : MonoBehaviour
         if (RewardedDisponivel())
         {
             recompensaGanha = false;
+            rewardedResolvido = false;
             rewardedAoGanhar = aoGanharRecompensa;
             rewardedAoFalhar = aoFalhar;
             rewarded.ShowAd();
@@ -157,9 +163,22 @@ public class AdsManager : MonoBehaviour
         }
     }
 
-    private void FinalizarRewarded(bool forcarFalha = false)
+    private void AgendarResolucaoRewarded()
     {
-        var ganhou = recompensaGanha && !forcarFalha;
+        if (rewardedResolvido) return;
+        StartCoroutine(ResolverRewardedNoProximoFrame());
+    }
+
+    private IEnumerator ResolverRewardedNoProximoFrame()
+    {
+        // Espera 1 frame: o OnAdRewarded pode chegar logo após o OnAdClosed
+        // (é o caso do mock do Editor). Assim capturamos a recompensa em qualquer ordem.
+        yield return null;
+
+        if (rewardedResolvido) yield break;
+        rewardedResolvido = true;
+
+        var ganhou = recompensaGanha;
         var cbGanhar = rewardedAoGanhar;
         var cbFalhar = rewardedAoFalhar;
 
@@ -168,6 +187,8 @@ public class AdsManager : MonoBehaviour
         recompensaGanha = false;
 
         rewarded?.LoadAd(); // pré-carrega o próximo
+
+        Debug.Log($"[AdsManager] Rewarded resolvido. Recompensa: {ganhou}");
 
         if (ganhou) cbGanhar?.Invoke();
         else        cbFalhar?.Invoke();

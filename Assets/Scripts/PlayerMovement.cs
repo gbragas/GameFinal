@@ -24,6 +24,11 @@ public class PlayerMovement : MonoBehaviour
     private bool canRotate = true;
     private bool isInSafeZone = false;
 
+    // Última posição segura (em chão firme) — usada para reviver sem cair na água/vazio.
+    private Vector3 lastSafePosition;
+    private Quaternion lastSafeRotation;
+    private bool temPosicaoSegura = false;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +53,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (animator == null)
             animator = GetComponentInChildren<Animator>();
+
+        // Inicializa a posição segura com a posição inicial (ou o spawn).
+        lastSafePosition = spawnPoint != null ? spawnPoint.position : transform.position;
+        lastSafeRotation = initialRotation;
+        temPosicaoSegura = true;
 
         // Adiciona automaticamente o gerador de UI mobile
         if (GetComponent<MobileControlsGenerator>() == null)
@@ -86,6 +96,24 @@ public class PlayerMovement : MonoBehaviour
     {
         MovePlayer();
         RotatePlayer();
+        AtualizarPosicaoSegura();
+    }
+
+    /// <summary>
+    /// Memoriza a última posição em chão firme (parado/andando, sem estar morrendo
+    /// nem caindo). Serve como ponto de revive seguro quando o player morre na água/vazio.
+    /// </summary>
+    private void AtualizarPosicaoSegura()
+    {
+        if (isDying) return;
+
+        // Só considera seguro se estiver no chão e não estiver caindo/subindo rápido.
+        if (IsGrounded() && Mathf.Abs(rb.linearVelocity.y) < 1.5f)
+        {
+            lastSafePosition = rb.position;
+            lastSafeRotation = rb.rotation;
+            temPosicaoSegura = true;
+        }
     }
 
     private void MovePlayer()
@@ -175,13 +203,20 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private bool isDying = false;
+
     public void KillPlayer()
     {
+        // Evita iniciar várias rotinas de morte (e várias telas de morte sobrepostas)
+        // se o player for atingido de novo enquanto já está morrendo.
+        if (isDying) return;
         StartCoroutine(KillPlayerRoutine());
     }
 
     private IEnumerator KillPlayerRoutine()
     {
+        isDying = true;
+
         // Guarda onde o jogador morreu (para a opção de reviver no local).
         Vector3 deathPosition = rb.position;
         Quaternion deathRotation = rb.rotation;
@@ -225,9 +260,19 @@ public class PlayerMovement : MonoBehaviour
 
         if (reviverNoLocal)
         {
-            // Reviver onde morreu (leve offset pra não nascer dentro do chão/armadilha).
-            rb.position = deathPosition + Vector3.up * 0.5f;
-            rb.rotation = deathRotation;
+            // Revive na última posição SEGURA (chão firme). Assim, se o player morreu
+            // caindo na água ou no vazio, ele volta para um lugar seguro em vez de
+            // renascer na água. Para mortes em terra firme, é praticamente o mesmo lugar.
+            if (temPosicaoSegura)
+            {
+                rb.position = lastSafePosition + Vector3.up * 0.5f;
+                rb.rotation = lastSafeRotation;
+            }
+            else
+            {
+                rb.position = deathPosition + Vector3.up * 0.5f;
+                rb.rotation = deathRotation;
+            }
         }
         else if (spawnPoint != null)
         {
@@ -245,6 +290,11 @@ public class PlayerMovement : MonoBehaviour
         {
             playerSound.PlaySpawn();
         }
+
+        // Pequena janela de invulnerabilidade ao reviver, para não morrer
+        // instantaneamente caso reviva em cima da armadilha/mob que o matou.
+        yield return new WaitForSeconds(reviverNoLocal ? 1.0f : 0.2f);
+        isDying = false;
     }
 
     public void Push(Vector3 direction)

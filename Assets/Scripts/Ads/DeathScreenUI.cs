@@ -18,6 +18,7 @@ public class DeathScreenUI : MonoBehaviour
     private Action onRevive;
     private Action onRestart;
 
+    private Canvas canvas;
     private Button btnRevive;
     private Button btnRestart;
     private TextMeshProUGUI status;
@@ -44,7 +45,7 @@ public class DeathScreenUI : MonoBehaviour
     {
         GarantirEventSystem();
 
-        var canvas = gameObject.AddComponent<Canvas>();
+        canvas = gameObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 1000;
         var scaler = gameObject.AddComponent<CanvasScaler>();
@@ -122,21 +123,18 @@ public class DeathScreenUI : MonoBehaviour
     {
         if (finalizado) return;
 
-        // Pausa o timer e bloqueia novos cliques enquanto o vídeo carrega/abre.
+        // Pausa o timer e ESCONDE a tela de morte para não sobrepor o vídeo.
         contando = false;
-        if (btnRevive != null) btnRevive.interactable = false;
-        if (btnRestart != null) btnRestart.interactable = false;
-        if (status != null) status.text = "Carregando vídeo...";
+        if (canvas != null) canvas.enabled = false;
 
         AdsManager.Instance.MostrarRewardedReviver(
             aoGanharRecompensa: () => Decidir(reviver: true),
             aoFalhar: () =>
             {
-                // Não assistiu até o fim: volta a contar e reabilita as opções.
+                // Não assistiu até o fim: mostra a tela de novo e volta a contar.
                 if (finalizado) return;
+                if (canvas != null) canvas.enabled = true;
                 contando = true;
-                if (btnRevive != null) btnRevive.interactable = true;
-                if (btnRestart != null) btnRestart.interactable = true;
                 if (status != null) status.text = "Anúncio não concluído.";
             });
     }
