@@ -35,6 +35,8 @@ public class LevelIntro : MonoBehaviour
 
     private void Start()
     {
+        // Corrige o áudio logo de cara: deixa só um AudioListener (no player).
+        GarantirUnicoAudioListener();
         CriarUI();
         rotinaPrincipal = StartCoroutine(RotinaApresentacao());
     }
@@ -241,6 +243,42 @@ public class LevelIntro : MonoBehaviour
 
             Debug.Log($"[LevelIntro] Câmera intrusa desligada: {cam.gameObject.name}");
         }
+
+        // Garante um único AudioListener (de preferência no player).
+        GarantirUnicoAudioListener();
+    }
+
+    /// <summary>
+    /// Garante exatamente UM AudioListener ativo, preferindo o do PLAYER. Com mais de
+    /// um listener, o Unity embaralha o áudio e os sons 3D (ex: o brilho das memórias)
+    /// passam a tocar "em todo lugar" em vez de por proximidade do player.
+    /// </summary>
+    private void GarantirUnicoAudioListener()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        AudioListener manter = player != null ? player.GetComponentInChildren<AudioListener>(true) : null;
+
+        // Sem listener no player: usa o da câmera de gameplay (ou cria um).
+        if (manter == null)
+        {
+            var brain = FindAnyObjectByType<Unity.Cinemachine.CinemachineBrain>(FindObjectsInactive.Include);
+            var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+            if (cam != null)
+            {
+                manter = cam.GetComponent<AudioListener>();
+                if (manter == null) manter = cam.gameObject.AddComponent<AudioListener>();
+            }
+        }
+        if (manter == null) return;
+
+        foreach (var listener in FindObjectsByType<AudioListener>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            bool manterEste = listener == manter;
+            if (listener.enabled != manterEste) listener.enabled = manterEste;
+            if (!manterEste)
+                Debug.Log($"[LevelIntro] AudioListener extra desligado: {listener.gameObject.name}");
+        }
+        manter.enabled = true;
     }
 
     private IEnumerator FadeCover(float startAlpha, float endAlpha, float duration)
