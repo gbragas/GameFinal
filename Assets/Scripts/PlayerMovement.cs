@@ -182,6 +182,10 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator KillPlayerRoutine()
     {
+        // Guarda onde o jogador morreu (para a opção de reviver no local).
+        Vector3 deathPosition = rb.position;
+        Quaternion deathRotation = rb.rotation;
+
         animator.SetBool("isDead", true);
 
         canRotate = false;
@@ -196,28 +200,44 @@ public class PlayerMovement : MonoBehaviour
             ctrl.enabled = false;
         }
 
-        yield return new WaitForSeconds(3f);
+        // Deixa a animação de morte tocar antes de mostrar a tela.
+        yield return new WaitForSeconds(2f);
 
-        if (spawnPoint != null)
+        // Mostra a tela de morte e espera a decisão do jogador.
+        bool decidiu = false;
+        bool reviverNoLocal = false;
+        DeathScreenUI.Mostrar(
+            onRevive: () => { reviverNoLocal = true; decidiu = true; },
+            onRestart: () => { reviverNoLocal = false; decidiu = true; }
+        );
+        yield return new WaitUntil(() => decidiu);
+
+        // Reabilita os controles.
+        SetMovementEnabled(true);
+        if (playerInput != null) playerInput.enabled = true;
+        foreach (var ctrl in inputControllers)
         {
-            SetMovementEnabled(true);
-
-            if (playerInput != null) playerInput.enabled = true;
-            foreach (var ctrl in inputControllers)
-            {
-                if (ctrl != null) ctrl.enabled = true;
-            }
-
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-
-            rb.position = spawnPoint.position;
-            rb.rotation = initialRotation;
-
-            canRotate = true;
-            SetMovementEnabled(true);
+            if (ctrl != null) ctrl.enabled = true;
         }
 
+        rb.linearVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        if (reviverNoLocal)
+        {
+            // Reviver onde morreu (leve offset pra não nascer dentro do chão/armadilha).
+            rb.position = deathPosition + Vector3.up * 0.5f;
+            rb.rotation = deathRotation;
+        }
+        else if (spawnPoint != null)
+        {
+            // Voltar ao início da fase (comportamento antigo).
+            rb.position = spawnPoint.position;
+            rb.rotation = initialRotation;
+        }
+
+        canRotate = true;
+        SetMovementEnabled(true);
         animator.SetBool("isDead", false);
 
         var playerSound = GetComponent<PlayerSound>();
