@@ -9,6 +9,7 @@ TagManager:
   - SlimeWayPoints
   - SpawnPoint
   - Mob
+  - Joystick
   layers:
   - Default
   - TransparentFX

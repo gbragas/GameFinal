@@ -342,8 +342,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Se o player atual JÁ é a versão correta, não troca (exceto se for v0 e estivermos resetando)
-        if (playerAtual.name.Contains($"v{versao}") && TotalColetados > 0)
+        // Se o player atual JÁ é a versão correta, não troca — evita destruir
+        // desnecessariamente o player da cena (o que faria a câmera Cinemachine
+        // perder o alvo e ficar travada).
+        if (playerAtual.name.Contains($"v{versao}"))
         {
             Debug.Log($"[GameManager] Player já é v{versao}, sem necessidade de trocar.");
             return;
@@ -356,18 +358,37 @@ public class GameManager : MonoBehaviour
         Quaternion rotacao = playerAtual.transform.rotation;
         Transform parentOriginal = playerAtual.transform.parent;
 
+        // Antes de destruir: descobre quais câmeras Cinemachine estavam seguindo/olhando
+        // este player (no root ou em algum filho dele), para reatribuir ao novo player.
+        var camsSeguindo = new System.Collections.Generic.List<Unity.Cinemachine.CinemachineCamera>();
+        var camsOlhando = new System.Collections.Generic.List<Unity.Cinemachine.CinemachineCamera>();
+        foreach (var cam in FindObjectsByType<Unity.Cinemachine.CinemachineCamera>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            if (cam.Follow != null && cam.Follow.IsChildOf(playerAtual.transform))
+                camsSeguindo.Add(cam);
+            if (cam.LookAt != null && cam.LookAt.IsChildOf(playerAtual.transform))
+                camsOlhando.Add(cam);
+        }
+
         // Desativa e destrói o player antigo
         playerAtual.SetActive(false);
         Destroy(playerAtual);
 
-        // Instancia o novo player (já vem com a câmera própria dele configurada no prefab)
+        // Instancia o novo player na mesma posição/rotação/parent
         GameObject novoPlayer = Instantiate(playerPrefabs[versao], posicao, rotacao, parentOriginal);
         novoPlayer.name = $"Player-v{versao}";
         novoPlayer.tag = "Player";
 
         playerAtual = novoPlayer;
 
-        Debug.Log($"[GameManager] Player trocado para v{versao}. O novo prefab gerenciará sua própria câmera.");
+        // Reatribui o alvo da(s) câmera(s) Cinemachine para o novo player,
+        // senão a câmera fica travada seguindo o player antigo (destruído).
+        foreach (var cam in camsSeguindo)
+            if (cam != null) cam.Follow = novoPlayer.transform;
+        foreach (var cam in camsOlhando)
+            if (cam != null) cam.LookAt = novoPlayer.transform;
+
+        Debug.Log($"[GameManager] Player trocado para v{versao}. Câmera Cinemachine reatribuída ({camsSeguindo.Count} follow / {camsOlhando.Count} lookAt).");
     }
 
     /// <summary>

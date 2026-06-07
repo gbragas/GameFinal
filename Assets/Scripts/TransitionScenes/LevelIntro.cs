@@ -30,10 +30,13 @@ public class LevelIntro : MonoBehaviour
 
     private Canvas canvas;
     private TextMeshProUGUI textoUI;
+    private Image coverPreto;
     private Coroutine rotinaPrincipal;
 
     private void Start()
     {
+        // Corrige o áudio logo de cara: deixa só um AudioListener (no player).
+        GarantirUnicoAudioListener();
         CriarUI();
         rotinaPrincipal = StartCoroutine(RotinaApresentacao());
     }
@@ -88,6 +91,17 @@ public class LevelIntro : MonoBehaviour
         rtTexto.anchorMax = new Vector2(0.5f, 0.5f);
         rtTexto.sizeDelta = new Vector2(1200, 200);
         rtTexto.anchoredPosition = Vector2.zero; // Centro da tela
+
+        // Overlay preto (fica por cima de tudo) usado para esconder o corte de câmera.
+        GameObject goCover = new GameObject("CoverPreto");
+        goCover.transform.SetParent(goCanvas.transform, false);
+        coverPreto = goCover.AddComponent<Image>();
+        coverPreto.color = new Color(0f, 0f, 0f, 0f); // começa transparente
+        coverPreto.raycastTarget = false;
+        RectTransform rtCover = coverPreto.rectTransform;
+        rtCover.anchorMin = Vector2.zero;
+        rtCover.anchorMax = Vector2.one;
+        rtCover.sizeDelta = Vector2.zero;
     }
 
     private IEnumerator RotinaApresentacao()
@@ -153,6 +167,19 @@ public class LevelIntro : MonoBehaviour
         // Fade out do Título
         yield return StartCoroutine(FadeTexto(1f, 0f, duracaoFade));
 
+        // Transição fluida: cobre a tela de preto ANTES de trocar de câmera, faz a troca
+        // escondida (sem corte seco) e revela já na câmera de gameplay correta.
+        yield return StartCoroutine(FadeCover(0f, 1f, 0.35f));
+
+        // Garante que só a câmera de gameplay (a que tem o CinemachineBrain) renderize.
+        // Câmeras de cutscene/timeline (ex: "Camera1") podem ficar ligadas e, por terem
+        // profundidade maior, renderizam por cima — deixando a câmera "travada".
+        GarantirCameraDeGameplay();
+        yield return null; // 1 frame para o CinemachineBrain assumir a câmera nova
+
+        // Revela o gameplay já enquadrado no player.
+        yield return StartCoroutine(FadeCover(1f, 0f, 0.55f));
+
         // Libera o player (sempre, não importa se houve timeline)
         Debug.Log("[LevelIntro] Descongelando player...");
         CongelarPlayer(false);
@@ -180,6 +207,93 @@ public class LevelIntro : MonoBehaviour
             textoUI.color = new Color(corTexto.r, corTexto.g, corTexto.b, alpha);
             yield return null;
         }
+    }
+
+    /// <summary>
+    /// Mantém ativa/renderizando apenas a câmera de gameplay (a que tem o
+    /// CinemachineBrain) e desliga qualquer outra câmera (cutscene/timeline)
+    /// que possa estar renderizando por cima.
+    /// </summary>
+    private void GarantirCameraDeGameplay()
+    {
+        var brain = FindAnyObjectByType<Unity.Cinemachine.CinemachineBrain>(FindObjectsInactive.Include);
+        Camera cameraGameplay = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+        if (cameraGameplay == null) return;
+
+        // A câmera de gameplay precisa estar ativa e habilitada.
+        if (!cameraGameplay.gameObject.activeSelf)
+            cameraGameplay.gameObject.SetActive(true);
+        cameraGameplay.enabled = true;
+
+        // Desliga todas as outras câmeras (intrusas) da cena.
+        foreach (var cam in FindObjectsByType<Camera>(FindObjectsInactive.Exclude, FindObjectsSortMode.None))
+        {
+            if (cam == cameraGameplay) continue;
+
+            cam.enabled = false;
+
+            // A câmera intrusa pode ter um PlayableDirector próprio que a religa.
+            var director = cam.GetComponent<PlayableDirector>();
+            if (director != null)
+            {
+                director.Stop();
+                director.playOnAwake = false;
+                director.enabled = false;
+            }
+
+            Debug.Log($"[LevelIntro] Câmera intrusa desligada: {cam.gameObject.name}");
+        }
+
+        // Garante um único AudioListener (de preferência no player).
+        GarantirUnicoAudioListener();
+    }
+
+    /// <summary>
+    /// Garante exatamente UM AudioListener ativo, preferindo o do PLAYER. Com mais de
+    /// um listener, o Unity embaralha o áudio e os sons 3D (ex: o brilho das memórias)
+    /// passam a tocar "em todo lugar" em vez de por proximidade do player.
+    /// </summary>
+    private void GarantirUnicoAudioListener()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        AudioListener manter = player != null ? player.GetComponentInChildren<AudioListener>(true) : null;
+
+        // Sem listener no player: usa o da câmera de gameplay (ou cria um).
+        if (manter == null)
+        {
+            var brain = FindAnyObjectByType<Unity.Cinemachine.CinemachineBrain>(FindObjectsInactive.Include);
+            var cam = brain != null ? brain.GetComponent<Camera>() : Camera.main;
+            if (cam != null)
+            {
+                manter = cam.GetComponent<AudioListener>();
+                if (manter == null) manter = cam.gameObject.AddComponent<AudioListener>();
+            }
+        }
+        if (manter == null) return;
+
+        foreach (var listener in FindObjectsByType<AudioListener>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+        {
+            bool manterEste = listener == manter;
+            if (listener.enabled != manterEste) listener.enabled = manterEste;
+            if (!manterEste)
+                Debug.Log($"[LevelIntro] AudioListener extra desligado: {listener.gameObject.name}");
+        }
+        manter.enabled = true;
+    }
+
+    private IEnumerator FadeCover(float startAlpha, float endAlpha, float duration)
+    {
+        if (coverPreto == null) yield break;
+
+        float t = 0;
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, t / duration);
+            coverPreto.color = new Color(0f, 0f, 0f, alpha);
+            yield return null;
+        }
+        coverPreto.color = new Color(0f, 0f, 0f, endAlpha);
     }
 
     private void CongelarPlayer(bool congelar)

@@ -92,6 +92,14 @@ public class TransitionManager : MonoBehaviour
         // Fade out
         yield return StartCoroutine(FadeElementos(1f, 0f, duracaoFade));
 
+        // Com a tela já preta, mostra o interstitial (se houver) antes de ativar a próxima cena.
+        bool adFinalizado = false;
+        if (AdsManager.Instance != null)
+            AdsManager.Instance.MostrarInterstitialTrocaDeMapa(() => adFinalizado = true);
+        else
+            adFinalizado = true;
+        yield return new WaitUntil(() => adFinalizado);
+
         // Transição final: tela preta e carrega a cena real
         if (asyncLoad != null)
         {
